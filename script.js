@@ -1,6 +1,27 @@
+let playerOne = true;
+let playerOnePieces = document.getElementsByClassName('playerOnePiece');
+let board = document.getElementById('board');
 
+function possMoves(){
+    pieceRow = 0;
+    pieceCol = 0;
+    for(let i = 0; i < 8; i++){
+        let rowCells = board.rows[i].cells;
+        for(let j = 0; j < 8; j++){
+             if(rowCells[j].style.backgroundColor == 'yellow'){
+                 pieceRow = i;
+                 pieceCol = j;
+                 break;
+             }
+        }
+    }
+    console.log(pieceRow + ',' + pieceCol);
+}
 function selectPiece(piece){
-    piece.style.backgroundColor = 'yellow';
+    let tile = piece.parentNode;
+    tile.style.backgroundColor = 'yellow';
+    possMoves();
+    //for(let i = 0; i < )
 }
 
 function BoardColorPicker() {
