@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 10x10 Game Board-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkers</title>
+    <link type="text/css" rel="stylesheet" href="./style.css">
+    <script src="./script.js"></script>
+</head>
+<body onload="generatePieces()">
+    <input id="BoardColorPicker" type="color">
+    <button type="button" onclick="BoardColorPicker()">Pick a color</button>
+    <div id="container">
+        <table id="board">
+            <tr>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+            </tr>
+            <tr>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+            </tr>
+            <tr>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+            </tr>
+            <tr>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+            </tr>
+            <tr>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+            </tr>
+            <tr>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+                <td class="whiteSpace"></td>
+                <td></td>
+        </table>
+    </div>
+    <p id="timer"></p>
+</body>
+</html>
