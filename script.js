@@ -12,15 +12,22 @@ function makeMove(){
     }
 }
 
-function possMoves() {
-    pieceRow = 0;
-    pieceCol = 0;
+let selectedTile = null;
+let pieceRow = 0;
+let pieceCol = 0;
+/*function possMoves() {
+    if(selectedTile != null){
+        selectedTile.style.backgroundColor = 'black';
+
+        
+    }
     for (let i = 0; i < 8; i++) {
         let rowCells = board.rows[i].cells;
         for (let j = 0; j < 8; j++) {
             if (rowCells[j].style.backgroundColor == 'yellow') {
                 pieceRow = i;
                 pieceCol = j;
+                selectedTile = rowCells[j];
                 break;
             }
         }
@@ -71,21 +78,69 @@ function possMoves() {
             leftMove.style.backgroundColor = 'green';
         }
     }
-}
+}*/
+
+function possMoves() {
+    if (selectedTile) {
+      pieceRow = selectedTile.parentNode.rowIndex;
+      pieceCol = selectedTile.cellIndex;
+  
+      // Calculate Player 1's possible moves (moving "up" the board)
+      if (playerOne) {
+        if (pieceCol > 0 && pieceRow > 0) { // Can move left-up if not on the left edge
+          highlightMove(pieceRow - 1, pieceCol - 1);
+        }
+        if (pieceCol < 7 && pieceRow > 0) { // Can move right-up if not on the right edge
+          highlightMove(pieceRow - 1, pieceCol + 1);
+        }
+      }
+      // Calculate Player 2's possible moves (moving "down" the board)
+      else {
+        if (pieceCol > 0 && pieceRow < 7) { // Can move left-down if not on the left edge
+          highlightMove(pieceRow + 1, pieceCol - 1);
+        }
+        if (pieceCol < 7 && pieceRow < 7) { // Can move right-down if not on the right edge
+          highlightMove(pieceRow + 1, pieceCol + 1);
+        }
+      }
+    }
+  }
+  
+  function highlightMove(row, col) {
+    let tile = board.rows[row].cells[col];
+    if (!tile.querySelector('.playerOnePiece') && !tile.querySelector('.playerTwoPiece')){ //checks if a piece already occupies the tile
+        tile.style.backgroundColor = 'green'; // Highlight the tile for a possible move
+        tile.classList.add('highlight'); // Add class for easy reset
+    }
+  }
+  
+
+function clearSelection() {
+    // Clear the current selection (if any)
+    if (selectedTile != null) {
+      selectedTile.style.backgroundColor = '#323232'; // Reset the background color
+      selectedTile = null; // Clear the reference
+    }
+  
+    // Clear all green highlighted tiles
+    const highlightedTiles = document.querySelectorAll('.highlight');
+    highlightedTiles.forEach(tile => {
+      tile.style.backgroundColor = '#323232';
+      tile.classList.remove('highlight'); // Remove the highlight class
+    });
+  }
+
 function selectPiece(piece) {
-     if(playerOne && piece.className == 'playerOnePiece'){
-        let tile = piece.parentNode;
-        tile.style.backgroundColor = 'yellow';
-        possMoves();
-     }
-     else if(!playerOne && piece.className == 'playerTwoPiece'){
-        let tile = piece.parentNode;
-        tile.style.backgroundColor = 'yellow';
-        possMoves();
-     }
-     else {
-        return;
-     }
+  clearSelection(); // Clear any existing selection first
+
+  // Proceed with selecting the new piece
+  if ((playerOne && piece.className === 'playerOnePiece') ||
+      (!playerOne && piece.className === 'playerTwoPiece')) {
+    let tile = piece.parentNode;
+    tile.style.backgroundColor = 'yellow'; // Highlight the selected piece
+    selectedTile = tile; // Update the selected tile
+    possMoves(); // Show possible moves for the new selection
+  }
 }
 
 function BoardColorPicker() {
@@ -157,6 +212,7 @@ function wipeBoard() {                          //when reset is clicked, wipes t
     }
     mins = 0;          //resets minutes to 0
     secs = 0;          //resets seconds to 0
+    clearSelection();
     console.log("The Game Has Reset.");
     setTimeout(generatePieces, 500);
 }
