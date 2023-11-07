@@ -1,11 +1,12 @@
 table {
-    margin:auto;
+    margin: auto;
     border-collapse: collapse;
 }
+
 td {
-    border:2px solid black;
-    height:75px;
-    width:75px;
+    border: 2px solid black;
+    height: 75px;
+    width: 75px;
     background-color: rgb(50, 50, 50);
     /*background-color: black;*/
 }
@@ -16,25 +17,29 @@ td {
 
 img {
     background-color: red;
-    height:75px;
-    width:75px;
+    height: 75px;
+    width: 75px;
 }
 
 .playerOnePiece {
     height: 75%;
-    width:75%;
-    border:2px solid white;
+    width: 75%;
+    border: 2px solid white;
     border-radius: 50%;
     background-color: red;
-    margin:auto;
+    margin: auto;
 }
 
 .playerTwoPiece {
     height: 75%;
     width: 75%;
-    border:2px solid white;
+    border: 2px solid white;
     border-radius: 50%;
     background-color: black;
     /*background-color: rgb(50, 50, 50);*/
     margin: auto;
+}
+
+.highlight:hover {
+    cursor: pointer;
 }
