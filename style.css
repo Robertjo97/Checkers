@@ -43,3 +43,9 @@ img {
 .highlight:hover {
     cursor: pointer;
 }
+
+#playerIdentifier {
+    text-align: center;
+    font-size: xx-large;
+    margin:10px;
+}

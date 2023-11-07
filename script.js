@@ -1,84 +1,42 @@
 let playerOne = true; //Holds current player
 let board = document.getElementById('board'); //global board
-
-function makeMove() {
-    //TODO
-
-    if (playerOne) {
-        playerOne = false;
-    }
-    else if (!playerOne) {
-        playerOne = true;
-    }
-}
-
 let selectedTile = null;
 let pieceRow = 0;
 let pieceCol = 0;
-/*function possMoves() {
-    if(selectedTile != null){
-        selectedTile.style.backgroundColor = 'black';
+var secs = 0;
+var mins = 0;
 
-        
+function clearHighlightsAndListeners() {
+    selectedTile.style.backgroundColor = '#323232'; //change background back to default;
+    const highlightedTiles = document.querySelectorAll('.highlight');
+    highlightedTiles.forEach(tile => {
+        tile.style.backgroundColor = '#323232'; // Reset the background color
+        tile.classList.remove('highlight'); // Remove the highlight class
+        tile.removeEventListener('click', clickedTile); // Remove the click event listener
+    });
+}
+
+function makeMove(targetTile) {
+    if (selectedTile && targetTile.classList.contains('highlight')) {
+        // Move the piece to the new tile
+        targetTile.appendChild(selectedTile.firstChild);
+
+        // Switch turns
+        playerOne = !playerOne;
+
+        if (playerOne) {
+            document.getElementById('playerIdentifier').innerHTML = "Player 1's turn";
+        }
+        else if (!playerOne) {
+            document.getElementById('playerIdentifier').innerHTML = "Player 2's turn";
+        }
+
+        // After the move, clear the highlights and event listeners
+        clearHighlightsAndListeners();
+
+        // Further game logic such as capturing a piece or checking for a win can go here
     }
-    for (let i = 0; i < 8; i++) {
-        let rowCells = board.rows[i].cells;
-        for (let j = 0; j < 8; j++) {
-            if (rowCells[j].style.backgroundColor == 'yellow') {
-                pieceRow = i;
-                pieceCol = j;
-                selectedTile = rowCells[j];
-                break;
-            }
-        }
-    }
-    //Player 1 possible moves highlighting
-    if (playerOne) {
-        //Inner piece
-        if(pieceCol != 0 && pieceCol != 7){
-        let row = board.rows[pieceRow - 1];
-        let leftMove = row.cells[pieceCol - 1];
-        leftMove.style.backgroundColor = 'green';
-        let rightMove = row.cells[pieceCol + 1];
-        rightMove.style.backgroundColor = 'green';
-        }
-        //left column piece
-        else if(pieceCol == 0){
-            let row = board.rows[pieceRow - 1];
-            let rightMove = row.cells[pieceCol + 1];
-            rightMove.style.backgroundColor = 'green';
-        }
-        //right column piece
-        else if(pieceCol == 7){
-            let row = board.rows[pieceRow - 1];
-            let leftMove = row.cells[pieceCol - 1];
-            leftMove.style.backgroundColor = 'green';
-        }
-    }
-    //Player 2 possible moves highlighting
-    else if (!playerOne) {
-        //Inner piece
-        if(pieceCol != 0 && pieceCol != 7){
-        let row = board.rows[pieceRow + 1];
-        let leftMove = row.cells[pieceCol - 1];
-        leftMove.style.backgroundColor = 'green';
-        let rightMove = row.cells[pieceCol + 1];
-        rightMove.style.backgroundColor = 'green';
-        }
-        //left column piece
-        else if(pieceCol == 0){
-            let row = board.rows[pieceRow + 1];
-            let rightMove = row.cells[pieceCol + 1];
-            rightMove.style.backgroundColor = 'green';
-        }
-        //right column piece
-        else if(pieceCol == 7){
-            let row = board.rows[pieceRow + 1];
-            let leftMove = row.cells[pieceCol - 1];
-            leftMove.style.backgroundColor = 'green';
-        }
-    }
-}*/
+}
 
 function possMoves() {
     if (selectedTile) {
@@ -111,9 +69,13 @@ function highlightMove(row, col) {
     if (!tile.querySelector('.playerOnePiece') && !tile.querySelector('.playerTwoPiece')) { //checks if a piece already occupies the tile
         tile.style.backgroundColor = 'green'; // Highlight the tile for a possible move
         tile.classList.add('highlight'); // Add class for easy reset
+        tile.addEventListener('click', clickedTile); //attaches event to highlighted tiles, then calls clickedTile with that event.
     }
 }
 
+function clickedTile(event) {
+    makeMove(event.target); //calls makeMove on the event target.
+}
 
 function clearSelection() {
     // Clear the current selection (if any)
@@ -140,7 +102,6 @@ function selectPiece(piece) {
         tile.style.backgroundColor = 'yellow'; // Highlight the selected piece
         selectedTile = tile; // Update the selected tile
         possMoves(); // Show possible moves for the new selection
-        //makeMove();
     }
 }
 
@@ -220,15 +181,12 @@ function wipeBoard() {                          //when reset is clicked, wipes t
 }
 
 // Timer function
-var secs = 0;
-var mins = 0;
 function displayTimer() {
     secs++;
     mins = Math.floor(secs / 60);
     let x = secs % 60;               //the seconds left before a minute
     document.getElementById("timer").innerHTML = mins + ":" + pad(x);
 }
-
 
 function pad(val) {
     return val > 9 ? val : "0" + val;
