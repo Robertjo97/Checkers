@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkers</title>
     <link type="text/css" rel="stylesheet" href="./style.css">
-    <script src="./script.js"></script>
 </head>
-<body onload="generatePieces()">
+<body onload="game.board.generatePieces()">
     <h1>FUCKIN CHECKERS</h1>
     <input id="BoardColorPicker" type="color">
-    <button type="button" onclick="BoardColorPicker()">Pick a color</button>
+    <button type="button" onclick="game.board.BoardColorPicker()">Pick a color</button>
     <br><br>
     <input id="playerOneColor" type="color">
-    <button type="button" onclick="playerOneColor()">Player 1 color</button>
+    <button type="button" onclick="game.board.playerOneColor()">Player 1 color</button>
     <br><br>
     <input id="playerTwoColor" type="color">
-    <button type="button" onclick="playerTwoColor()">Player 2 color</button>
+    <button type="button" onclick="game.board.playerTwoColor()">Player 2 color</button>
+    <div id="playerIdentifier">Player 1's turn</div>
     <div id="container">
         <table id="board">
             <tr>
@@ -102,7 +102,8 @@
             </tr>
         </table>
     </div>
-    <button onclick="wipeBoard()">Reset</button>
+    <button onclick="game.board.wipeBoard()">Reset</button>
     <p id="timer">0:00</p>
+    <script src="./script.js"></script>
 </body>
 </html>
