@@ -17,7 +17,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 exit;
             }
         }
-        $user = array("username" => $username, 'password' => $password);
+        $user = array("username" => $username, 'password' => $password, 'totalScore' => 0, 'gamesWon' => 0, 'timePlayed' => 0, 'gamesPlayed' => 0, 'matchHistory' => []);
         $data[] = $user;
         file_put_contents('./users.json', json_encode($data));
         header('Location: ./game1.html');
