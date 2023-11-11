@@ -22,22 +22,33 @@ class Game {
         this.board.clearSelection();
     }
 
-    wipeBoard() {              
+    checkWin() {
+        
+    }
+
+    resetGame() {
+        this.board.clearHighlightsAndListeners();           //clear any event listeners and highlighted tiles
+        this.board.clearSelection();                        //clears any selected tiles from a player
+        this.timer.secs = -1;                                //resets the seconds of the timer
+        this.timer.mins = 0;                                 //resets the minutes of the timer
+        document.getElementById('playerIdentifier').innerHTML = "Player 1's turn";
+
+        // wipes the board
         let board = document.getElementById('board');
-        for (let i = 0; i < board.rows.length; i++) {       //for loop wipes the board
+        for (let i = 0; i < board.rows.length; i++) {
             let x = board.rows[i].cells;
             for (let j = 0; j < 8; j++) {
-                x[j].innerHTML = " ";
+                x[j].innerHTML = "";
             }
         }
-        this.timer.secs = -1; // Reset the seconds of the timer object
-        this.timer.mins = 0; // Reset the minutes of the timer object
-        this.currentPlayer = this.playerOne;            // sets the current player back to player one
-        //this.board.clearHighlightsAndListeners();
-        //this.board.clearSelection();
-        document.getElementById('playerIdentifier').innerHTML = "Player 1's turn";
-        console.log("The Game Has Reset.");
-        this.board.generatePieces(); // generates the pieces again
+
+        // reset players and generate pieces
+        this.playerOne = new Player('Player 1', 'playerOnePiece');
+        this.playerTwo = new Player('Player 2', 'playerTwoPiece');
+        this.playerOne.resetPiecesArr();                        //resets the number of pieces for player 1 in their array
+        this.playerTwo.resetPiecesArr();                        //resets the number of pieces for player 2 in their array
+        this.currentPlayer = this.playerOne;                    //sets the first move back to player 1
+        this.board.generatePieces();
     }
 }
 
@@ -57,6 +68,10 @@ class Player {
         if (index !== -1) {
             this.pieces.splice(index, 1);
         }
+    }
+
+    resetPiecesArr() {
+        this.pieces = [];
     }
 
     playerOneColor() {          // handles the color switching for player 1
