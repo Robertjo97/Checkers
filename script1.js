@@ -1,29 +1,35 @@
 class Game {
     constructor() {
-        this.playerOne = new Player('Player 1', 'playerOnePiece');
-        this.playerTwo = new Player('Player 2', 'playerTwoPiece');
-        this.currentPlayer = this.playerOne;
+        this.playerOne = new Player('Player 1', 'playerOnePiece');      //player 1
+        this.playerTwo = new Player('Player 2', 'playerTwoPiece');      //player 2
+        this.currentPlayer = this.playerOne;                            //default player 1 goes first
         this.board = new Board();                   //the game board
         this.timer = new Timer();                   //the game timer
         setInterval(this.timer.displayTimer.bind(this.timer), 1000);
-        //this.board.drawBoard();
     }
 
-    switchPlayer() {
+    switchPlayer() {                                //switches player back and forth
         this.currentPlayer.turn = !this.currentPlayer.turn;
         if (this.currentPlayer === this.playerOne) {
             this.currentPlayer = this.playerTwo;
-            document.getElementById('playerIdentifier').innerHTML = "Player 2's turn";
+            document.getElementById('playerIdentifier').innerHTML = "Player 2's Turn";
         } else {
             this.currentPlayer = this.playerOne;
-            document.getElementById('playerIdentifier').innerHTML = "Player 1's turn";
+            document.getElementById('playerIdentifier').innerHTML = "Player 1's Turn";
         }
-        this.board.clearHighlightsAndListeners();
-        this.board.clearSelection();
     }
 
     checkWin() {
-        
+        if(this.playerOne.pieces.length === 0) {                //checks if player 1 has any pieces left 
+            alert("Player 2 wins! Player 1 has no more pieces left.");
+            console.log("Player 2 wins! Player 1 has no more pieces left.");
+        } else if (this.playerTwo.pieces.length === 0) {        //checks if player 2 has any pieces left
+            alert("Player 1 wins! Player 2 has no more pieces left.");
+            console.log("Player 1 wins! Player 2 has no more pieces left.");
+        }
+        // else {
+        //     console.log("Player " + (this.currentPlayer === this.playerOne ? "2" : "1") + " wins! The opponent cannot make any moves.");
+        // }
     }
 
     resetGame() {
@@ -31,7 +37,7 @@ class Game {
         this.board.clearSelection();                        //clears any selected tiles from a player
         this.timer.secs = -1;                                //resets the seconds of the timer
         this.timer.mins = 0;                                 //resets the minutes of the timer
-        document.getElementById('playerIdentifier').innerHTML = "Player 1's turn";
+        document.getElementById('playerIdentifier').innerHTML = "Player 1's Turn";
 
         // wipes the board
         let board = document.getElementById('board');
@@ -48,6 +54,7 @@ class Game {
         this.playerOne.resetPiecesArr();                        //resets the number of pieces for player 1 in their array
         this.playerTwo.resetPiecesArr();                        //resets the number of pieces for player 2 in their array
         this.currentPlayer = this.playerOne;                    //sets the first move back to player 1
+        console.log("The Game Has Reset");
         this.board.generatePieces();
     }
 }
@@ -117,29 +124,62 @@ class Board {
         if (this.selectedTile && targetTile.classList.contains('highlight')) {
             const piece = this.selectedTile.firstChild;
             const player = game.currentPlayer;
-            const pieceIndex = player.pieces.findIndex(
+            const pieceIndex = player.pieces.findIndex(                 // finds the index in the array of the selected piece
                 p => p.position.row === this.pieceRow && p.position.col === this.pieceCol
             );
-
-            // Update the position of the piece in the player's pieces array
+    
+            // calculates the position of the jumped-over piece
+            const jumpedRow = (this.pieceRow + targetTile.parentNode.rowIndex) / 2;
+            const jumpedCol = (this.pieceCol + targetTile.cellIndex) / 2;
+    
+            // check if there is an opponent piece at the position of the jumped-over piece
+            const opponent = game.currentPlayer === game.playerOne ? game.playerTwo : game.playerOne;
+            const opponentPiece = opponent.pieces.find(
+                p => p.position.row === jumpedRow && p.position.col === jumpedCol
+            );
+    
+            // if there is an opponent piece on the jumped-over position, capture it
+            if (opponentPiece) {
+                opponent.removePiece(opponentPiece);
+    
+                // remove captured piece from the board
+                const capturedPieceCell = this.board.rows[opponentPiece.position.row].cells[opponentPiece.position.col];
+                capturedPieceCell.innerHTML = ''; // clear that piece from html table
+            }
+    
+            // update the position of the piece in the player's pieces array
             if (pieceIndex !== -1) {
                 player.pieces[pieceIndex].position.row = targetTile.parentNode.rowIndex;
                 player.pieces[pieceIndex].position.col = targetTile.cellIndex;
             }
 
-            // moves selected piece to the new tile
+            // checks if a piece made it to end of board and kings it
+            if ((game.currentPlayer === game.playerOne && targetTile.parentNode.rowIndex === 0) ||
+                (game.currentPlayer === game.playerTwo && targetTile.parentNode.rowIndex === 7)) {
+                const pieceIndex = player.pieces.findIndex(
+                    p => p.position.row === targetTile.parentNode.rowIndex && p.position.col === targetTile.cellIndex
+                );
+    
+                if (pieceIndex !== -1) {
+                    player.pieces[pieceIndex].kingPiece();
+                    // visual logic here
+                }
+            }
+    
+            // appends the piece to the new tile
             targetTile.appendChild(piece);
-
-            // switches turns 
+    
+            // checks for win and switches turns 
+            game.checkWin();
             game.switchPlayer();
-
-            // clears the highlights and event listeners
+    
+            // clear the highlights and event listeners
             this.clearHighlightsAndListeners();
         }
     }
 
     clearSelection() {
-        // Clear the current selection (if any)
+        // clears the current selection (if any)
         if (this.selectedTile != null) {  // refers to the instance variable
             this.selectedTile.style.backgroundColor = '#323232';
             this.selectedTile = null;
@@ -159,7 +199,6 @@ class Board {
             let tile = piece.parentNode;
             tile.style.backgroundColor = 'yellow';
             this.selectedTile = tile;
-            //this.selectedTile = piece.parentNode;
             this.pieceRow = this.selectedTile.parentNode.rowIndex;
             this.pieceCol = this.selectedTile.cellIndex;
 
@@ -183,14 +222,46 @@ class Board {
 
     highlightMove(row, col) {
         let tile = this.board.rows[row].cells[col];  // refers to the instance variable (const game)
-            if (!tile.querySelector('.playerOnePiece') && !tile.querySelector('.playerTwoPiece')) {
+            if (!tile.querySelector('.playerOnePiece') && !tile.querySelector('.playerTwoPiece')) {     //if the tiles are empty, highlight green
                 tile.style.backgroundColor = 'green';
                 tile.classList.add('highlight');
                 tile.addEventListener('click', this.clickedTile);  //attaches event to highlighted tiles, then calls clickedTile with that event.
+            } else if (tile.querySelector('.playerOnePiece') || tile.querySelector('.playerTwoPiece')) {
+                const opponentPiece = tile.querySelector('.playerOnePiece') || tile.querySelector('.playerTwoPiece');
+                const opponent = game.currentPlayer === game.playerOne ? game.playerTwo : game.playerOne;
+        
+                // checks if the target tile contains an opponent piece and is capturable
+                if (opponentPiece && this.isCapturableTile(row, col)) {
+                    const captureTargetRow = row + (row - this.pieceRow);
+                    const captureTargetCol = col + (col - this.pieceCol);
+        
+                    // check if the capture target tile is within the range and is empty
+                    if (captureTargetRow >= 0 && captureTargetRow < 8 && captureTargetCol >= 0 && captureTargetCol < 8) {
+                        const captureTargetTile = this.board.rows[captureTargetRow].cells[captureTargetCol];
+        
+                        if (!captureTargetTile.querySelector('.playerOnePiece') && !captureTargetTile.querySelector('.playerTwoPiece')) {
+                            captureTargetTile.style.backgroundColor = 'green';
+                            captureTargetTile.classList.add('highlight');
+                            captureTargetTile.addEventListener('click', this.clickedTile);
+                        }
+                    }
+                }
             }
     }
 
-    clickedTile(e) {
+    isCapturableTile(row, col) {                    // sees if a title is capturable
+        const opponent = game.currentPlayer === game.playerOne ? game.playerTwo : game.playerOne;
+    
+        // check if there is an opponent piece on the target tile and finds its index
+        const opponentPieceIndex = opponent.pieces.findIndex(
+            p => p.position.row === row && p.position.col === col
+        );
+    
+        //if the opponent piece on the target tile is capturable
+        return opponentPieceIndex !== -1;
+    }
+
+    clickedTile(e) {                                //listens for when the player clicks a green tile and proceeds to move the piece
         const targetTile = e.target;
         this.movePiece(this.selectedTile, targetTile);
     }
@@ -273,14 +344,19 @@ class Board {
 class Piece {
     constructor(player, row, col) {             // name of player, the row and column its located in (position)
         this.player = player;
-        this.position = { row, col };
+        this.position = { row, col };           //holds position of each players piece on the board
+        this.isKing = false;                    //all piece objects are set to false
+    }
+
+    kingPiece() {                               //kings the selected piece
+        this.isKing = true;
     }
 }
 
 class Timer {
     constructor() {
-        this.secs = 0;
-        this.mins = 0;
+        this.secs = 0;                          //seconds
+        this.mins = 0;                          //minutes
     }
 
     displayTimer() {
@@ -291,7 +367,7 @@ class Timer {
     }
     
     pad(val) {
-        return val > 9 ? val : "0" + val;
+        return val > 9 ? val : "0" + val;       //ternary statement if value is greater than 9, returns just val
     }
 }
 
