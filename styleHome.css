@@ -1,18 +1,24 @@
+ol, body {
+    margin: 0px;
+}
+
 li {
     display: inline-block;
 }
 
 ol {
     background-color: lightgrey;
+    display:flexbox;
 }
 
 .options {
     font-size: larger;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
-    padding:10px 10px 0px 10px;
+    padding:10px 10px 10px 10px;
     margin-left:50px;
 }
+
 a {
     text-decoration: none;
     color:black;
@@ -25,4 +31,8 @@ a:hover {
 #logo {
     height:150px;
     width:auto;
+}
+
+h1 {
+    text-align: center;
 }
