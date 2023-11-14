@@ -1,4 +1,4 @@
-class Game {
+class Game {                    //8 x 8 board
     constructor() {
         this.playerOne = new Player('Player 1', 'playerOnePiece');      //player 1
         this.playerTwo = new Player('Player 2', 'playerTwoPiece');      //player 2
