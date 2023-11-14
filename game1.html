@@ -5,20 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkers</title>
-    <link type="text/css" rel="stylesheet" href="./game.css">
+    <link type="text/css" rel="stylesheet" href="./style.css">
 </head>
 <body onload="game.board.generatePieces()">
     <h1>CHECKERS</h1>
     <input id="BoardColorPicker" type="color">
-    <button type="button" onclick="game.board.BoardColorPicker()">Pick a color</button>
+    <button type="button" onclick="game.board.BoardColorPicker()">Change Board Color</button>
     <br><br>
     <input id="playerOneColor" type="color">
-    <button type="button" onclick="game.playerOne.playerOneColor()">Player 1 color</button>
+    <button type="button" onclick="game.playerOne.playerOneColor()">Player 1 Color</button>
     <br><br>
     <input id="playerTwoColor" type="color">
-    <button type="button" onclick="game.playerTwo.playerTwoColor()">Player 2 color</button>
-    <div id="playerIdentifier">Player 1's turn</div>
+    <button type="button" onclick="game.playerTwo.playerTwoColor()">Player 2 Color</button>
+    <div id="playerIdentifier">Player 1's Turn</div>
     <div id="container">
+        <div>
+            <p>Number of pieces left for Player 1: </p>
+            <p id="P1Pieces"></p>
+        </div>
         <table id="board">
             <tr>
                 <td></td>
@@ -101,8 +105,10 @@
                 <td></td>
             </tr>
         </table>
+        <p>Number of Pieces left for Player 2: </p>
+        <p id="P2Pieces"></p>
     </div>
-    <button onclick="game.resetGame()">Reset</button>
+    <button onclick="game.resetGame()">Reset Game</button>
     <p id="timer">0:00</p>
     <script src="./script1.js"></script>
 </body>
