@@ -1,45 +1,63 @@
 let leaderboard = document.getElementById('leaderboard');
-let playerData = null;
-function getPlayerData(){
+let table = document.createElement('table');
+leaderboard.appendChild(table);
+
+function getPlayerData(func) {
     let request = new XMLHttpRequest();
-    request.onreadystatechange = function(){
-        if(request.readyState == 4 && request.status == 200){
-            playerData = JSON.parse(request.responseText);
-            for(let i = 0; i < playerData.length; i++){
-                let username = document.createElement('p');
-                username.className = 'username';
-                username.innerHTML = playerData[i].username;
-                leaderboard.appendChild(username);
+    request.open('POST', './leaderboard.php');
+    request.send();
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            let playerData = JSON.parse(request.responseText);
+            func(playerData);
+        }
+    }
+}
 
-                let totalScore = document.createElement('p');
-                totalScore.className = 'totalScore';
-                totalScore.innerHTML = playerData[i].totalScore;
-                leaderboard.appendChild(totalScore);
+function buildTable(playerData) {
+    for (let i = -1; i < playerData.length; i++) {
+        let tr = document.createElement('tr');
+        table.appendChild(tr);
+        if (i === -1) {
+            tr.innerHTML = '<th>Username</th><th>Total Score</th><th>Games Won</th><th>Time Played</th><th>Games Played</th><th>Match History</th>';
+        }
+        else {
+            for (let j = 0; j < 6; j++) {
+                let td = document.createElement('td');
+                switch (j) {
+                    case 0:
+                        td.innerHTML = playerData[i].username;
+                        tr.appendChild(td);
+                        break;
 
-                let gamesWon = document.createElement('p');
-                gamesWon.className = 'gamesWon';
-                gamesWon.innerHTML = playerData[i].gamesWon;
-                leaderboard.appendChild(gamesWon);
+                    case 1:
+                        td.innerHTML = playerData[i].totalScore;
+                        tr.appendChild(td);
+                        break;
 
-                let timePlayed = document.createElement('p');
-                timePlayed.className = 'timePLayed';
-                timePlayed.innerHTML = playerData[i].timePlayed;
-                leaderboard.appendChild(timePlayed);
-                
-                let gamesPlayed = document.createElement('p');
-                gamesPlayed.className = 'gamesWon';
-                gamesPlayed.innerHTML = playerData[i].gamesPlayed;
-                leaderboard.appendChild(gamesPlayed);
+                    case 2:
+                        td.innerHTML = playerData[i].gamesWon;
+                        tr.appendChild(td);
+                        break;
 
-                let matchHistory = document.createElement('p');
-                matchHistory.className = 'matchHistory';
-                matchHistory.innerHTML = 'TBD';
-               // matchHistory.innerHTML = playerData[i].matchHistory[i].game1;
-                leaderboard.appendChild(matchHistory);
+                    case 3:
+                        td.innerHTML = playerData[i].timePlayed;
+                        tr.appendChild(td);
+                        break;
+
+                    case 4:
+                        td.innerHTML = playerData[i].gamesPlayed;
+                        tr.appendChild(td);
+                        break;
+
+                    case 5:
+                        td.innerHTML = '<a href="./leaderboard.html">' + playerData[i].username + "'s Match History</a> ";
+                        tr.appendChild(td);
+                        break;
+                }
             }
         }
     }
-    request.open('POST', './leaderboard.php');
-    request.send();
 }
-getPlayerData();
+
+getPlayerData(buildTable);
