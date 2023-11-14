@@ -15,10 +15,25 @@ td {
     background-color: white;
 }
 
+img {
+    background-color: red;
+    height: 75px;
+    width: 75px;
+}
+
 .playerOnePiece {
     height: 75%;
     width: 75%;
     border: 2px solid white;
+    border-radius: 50%;
+    background-color: red;
+    margin: auto;
+}
+
+.playerOnePieceKing {
+    height: 75%;
+    width: 75%;
+    border: 3px solid gold;
     border-radius: 50%;
     background-color: red;
     margin: auto;
@@ -30,7 +45,15 @@ td {
     border: 2px solid white;
     border-radius: 50%;
     background-color: black;
-    /*background-color: rgb(50, 50, 50);*/
+    margin: auto;
+}
+
+.playerTwoPieceKing {
+    height: 75%;
+    width: 75%;
+    border: 3px solid gold;
+    border-radius: 50%;
+    background-color: black;
     margin: auto;
 }
 
