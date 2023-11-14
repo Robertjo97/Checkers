@@ -8,6 +8,13 @@ class Game {
         setInterval(this.timer.displayTimer.bind(this.timer), 1000);
     }
 
+    sendPlayerData(categoryName, val){
+        let playerData = new XMLHttpRequest();
+        playerData.open('POST', './gameData.php');
+        playerData.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        playerData.send(categoryName + '=' + val);
+    }
+
     switchPlayer() {                                //switches player back and forth
         this.currentPlayer.turn = !this.currentPlayer.turn;
         if (this.currentPlayer === this.playerOne) {
@@ -26,6 +33,7 @@ class Game {
         } else if (this.playerTwo.pieces.length === 0) {        //checks if player 2 has any pieces left
             alert("Player 1 wins! Player 2 has no more pieces left.");
             console.log("Player 1 wins! Player 2 has no more pieces left.");
+            this.sendPlayerData('username', 'Rob');
         }
         // else {
         //     console.log("Player " + (this.currentPlayer === this.playerOne ? "2" : "1") + " wins! The opponent cannot make any moves.");
