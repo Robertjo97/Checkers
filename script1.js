@@ -8,11 +8,11 @@ class Game {
         setInterval(this.timer.displayTimer.bind(this.timer), 1000);
     }
 
-    sendPlayerData(categoryOneName, valOne, categoryTwoName, valTwo, categoryThreeName, valThree, categoryFourName, valFour) {
+    sendPlayerData(categoryOneName, valOne, categoryTwoName, valTwo, categoryThreeName, valThree, categoryFourName, valFour, categoryFiveName, valFive) {
         let playerData = new XMLHttpRequest();
         playerData.open('POST', './gameData.php');
         playerData.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        playerData.send(categoryOneName + '=' + valOne + '&' + categoryTwoName + '=' + valTwo + '&' + categoryThreeName + '=' + valThree + '&' + categoryFourName + '=' + valFour);
+        playerData.send(categoryOneName + '=' + valOne + '&' + categoryTwoName + '=' + valTwo + '&' + categoryThreeName + '=' + valThree + '&' + categoryFourName + '=' + valFour + '&' + categoryFiveName + '=' + valFive);
     }
 
     switchPlayer() {                                //switches player back and forth
@@ -28,14 +28,14 @@ class Game {
 
     checkWin() {
         let timeInSecs = this.timer.mins * 60 + this.timer.secs; 
-        if (this.playerOne.pieces.length === 0) {     //checks if player 1 has any pieces left          
+        if (this.playerOne.pieces.length === 0) {     //checks if player 1 has any pieces left PLAYER 2 WIN         
             alert("Player 2 wins! Player 1 has no more pieces left.");
             console.log("Player 2 wins! Player 1 has no more pieces left.");
-            this.sendPlayerData('username', 'Rob', 'totalScore', 12 - this.playerTwo.pieces.length, 'win', 'false', 'timePlayed', timeInSecs);
-        } else if (this.playerTwo.pieces.length === 0) {        //checks if player 2 has any pieces left
+            this.sendPlayerData('username', 'Rob', 'totalScore', 12 - this.playerTwo.pieces.length, 'win', 'false', 'timePlayed', timeInSecs, 'opScore', 12);
+        } else if (this.playerTwo.pieces.length === 0) {        //checks if player 2 has any pieces left PLAYER 1 WIN
             alert("Player 1 wins! Player 2 has no more pieces left.");
             console.log("Player 1 wins! Player 2 has no more pieces left.");
-            this.sendPlayerData('username', 'Rob', 'totalScore', 12, 'win', 'true', 'timePlayed', timeInSecs);
+            this.sendPlayerData('username', 'Rob', 'totalScore', 12, 'win', 'true', 'timePlayed', timeInSecs, 'opScore', 12 - this.playerOne.pieces.length);
         }
         // else {
         //     console.log("Player " + (this.currentPlayer === this.playerOne ? "2" : "1") + " wins! The opponent cannot make any moves.");
