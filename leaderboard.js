@@ -19,7 +19,7 @@ function buildTable(playerData) {
         let tr = document.createElement('tr');
         table.appendChild(tr);
         if (i === -1) {
-            tr.innerHTML = '<th>Username</th><th>Total Score</th><th>Games Won</th><th>Time Played</th><th>Games Played</th><th>Match History</th>';
+            tr.innerHTML = '<th>Username</th><th>Total Score</th><th>Games Won</th><th>Time Played</th><th>Games Played</th>';
         }
         else {
             for (let j = 0; j < 6; j++) {
@@ -31,7 +31,7 @@ function buildTable(playerData) {
                         break;
 
                     case 1:
-                        td.innerHTML = playerData[i].totalScore;
+                        td.innerHTML = playerData[i].totalScore + ' captures';
                         tr.appendChild(td);
                         break;
 
@@ -41,7 +41,11 @@ function buildTable(playerData) {
                         break;
 
                     case 3:
-                        td.innerHTML = playerData[i].timePlayed;
+                        let rawSeconds = playerData[i].timePlayed;
+                        let minutes = Math.floor(rawSeconds / 60);
+                        let seconds = rawSeconds - minutes * 60;
+
+                        td.innerHTML = minutes + ' minutes ' + seconds + ' seconds';
                         tr.appendChild(td);
                         break;
 
@@ -49,15 +53,14 @@ function buildTable(playerData) {
                         td.innerHTML = playerData[i].gamesPlayed;
                         tr.appendChild(td);
                         break;
-
-                    case 5:
-                        td.innerHTML = '<a href="./leaderboard.html">' + playerData[i].username + "'s Match History</a> ";
-                        tr.appendChild(td);
-                        break;
                 }
             }
         }
     }
+}
+
+function buildMatchHistory(playerData){
+
 }
 
 getPlayerData(buildTable);
