@@ -1,6 +1,5 @@
 let leaderboard = document.getElementById('leaderboard');
-let table = document.createElement('table');
-leaderboard.appendChild(table);
+let matchHistory = document.getElementById('mathHistory');
 
 function getPlayerData(func) {
     let request = new XMLHttpRequest();
@@ -15,6 +14,8 @@ function getPlayerData(func) {
 }
 
 function buildTable(playerData) {
+    let table = document.createElement('table');
+    leaderboard.appendChild(table);
     for (let i = -1; i < playerData.length; i++) {
         let tr = document.createElement('tr');
         table.appendChild(tr);
@@ -59,8 +60,10 @@ function buildTable(playerData) {
     }
 }
 
-function buildMatchHistory(playerData){
-
+function buildMatchHistory(playerData) {
+    let table = document.createElement('table');
+    matchHistory.appendChild(table);
+    
 }
 
 getPlayerData(buildTable);
