@@ -25,7 +25,7 @@ function buildTable(playerData) {
         let tr = document.createElement('tr');
         table.appendChild(tr);
         if (i === -1) {
-            tr.innerHTML = '<th>Username</th><th>Total Score</th><th>Games Won</th><th>Time Played</th><th>Games Played</th>';
+            tr.innerHTML = '<th>Username</th><th>Total Score</th><th>Games Won</th><th>Games Played</th><th>Time Played</th>';
         }
         else {
             for (let j = 0; j < 5; j++) {

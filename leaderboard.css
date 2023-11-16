@@ -1,15 +1,13 @@
-table {
-    border:2px solid;
+#leaderboard table, #matchHistory table {
     margin: auto;
 }
-td, th {
-    border:2px solid;
-    padding: 5px;
+
+#leaderboard, #matchHistory {
+    border: 2px solid black;
+    text-align: center;
 }
 
-div {
-    text-align: center;
+#leaderboard td, #leaderboard th, #matchHistory td, #matchHistory th {
     border: 2px solid black;
-    margin-bottom: 10px;
 }
 
