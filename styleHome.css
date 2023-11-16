@@ -1,79 +1,87 @@
-/* Basic Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
+/* body { 
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
+}
+#header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+#header ol {
+    list-style-type: none;
+    background-color: #ced1d4;
+    margin:0;
+    border:1px solid black;
 }
 
-/* Header and Navigation */
-header {
-    background: #333;
-    color: #fff;
-    padding: 10px 0;
+#header li {
+    display: inline;
+    margin:2%;
 }
 
-header ol {
-    list-style: none;
-    display: flex;
-    justify-content:space-evenly;
-    align-items: center;
-}
-
-header li {
-    margin: 0 20px;
-}
-
-header a {
-    color: #fff;
+#header li a {
     text-decoration: none;
-    font-size: 18px;
+    color:black;
+    font-size: x-large;
+    font-weight: bold;
+
 }
 
-header a:hover {
+#header li a:hover {
+    cursor: pointer;
     text-decoration: underline;
 }
 
 #logo {
-    height: 175px; /* Adjust logo size */
+    height:150px;
+    width:auto;
+}
+
+#title {
+    text-align: center;
+} */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ced1d4; /* Light gray background */
+}
+
+#header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#header ol {
+    list-style-type: none;
+    background-color: #13284c; /* Dark navy blue background */
+    padding: 10px 0;
+    margin: 0;
+    border: none; /* Removed the black border */
+}
+
+#header li {
+    display: inline;
+    margin: 0 15px; /* Adjusted margin for uniform spacing */
+}
+
+#header li a {
+    text-decoration: none;
+    color: #ffffff; /* White text for contrast */
+    font-size: x-large;
+    font-weight: bold;
+}
+
+#header li a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #b1102b; /* Deep red for hover effect */
+}
+
+#logo {
+    height: 150px;
     width: auto;
 }
 
-/* Responsive Header */
-@media screen and (max-width: 768px) {
-    header li {
-        margin: 0 10px;
-    }
-
-    header a {
-        font-size: 16px;
-    }
-
-    #logo {
-        height: 60px;
-    }
-}
-
-/* Main Content */
-h1 {
+#title {
     text-align: center;
-    margin: 20px 0;
-    font-size: 28px;
-}
-
-/* Footer (Optional) */
-footer {
-    text-align: center;
-    padding: 20px 0;
-    background: #333;
-    color: #fff;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+    color: #13284c; /* Dark navy blue for the title */
+    margin-top: 20px; /* Added margin for spacing */
 }
