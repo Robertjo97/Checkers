@@ -1,7 +1,15 @@
 table {
     border:2px solid;
+    margin: auto;
 }
 td, th {
     border:2px solid;
     padding: 5px;
 }
+
+div {
+    text-align: center;
+    border: 2px solid black;
+    margin-bottom: 10px;
+}
+
