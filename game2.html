@@ -18,19 +18,25 @@
         </ol>
         <!--bulldog logo to go home, leaderboard, contact, help -->
     </header>
-    <h1>FUCKIN CHECKERS</h1>
-    <input id="BoardColorPicker" type="color">
-    <button type="button" onclick="BoardColorPicker()">Pick a color</button>
-    <br><br>
-    <input id="playerOneColor" type="color">
-    <button type="button" onclick="game.playerOne.playerOneColor()">Player 1 Color</button>
-    <br><br>
-    <input id="playerTwoColor" type="color">
-    <button type="button" onclick="game.playerTwo.playerTwoColor()">Player 2 Color</button>
+    <h1>CHECKERS</h1>
+    <div id="buttons-container">
+        <input id="BoardColorPicker" type="color">
+        <button type="button" onclick="game.board.BoardColorPicker()">Change Board Color</button>
+        <br><br>
+        <input id="playerOneColor" type="color">
+        <button type="button" onclick="game.playerOne.playerOneColor()">Player 1 Color</button>
+        <br><br>
+        <input id="playerTwoColor" type="color">
+        <button type="button" onclick="game.playerTwo.playerTwoColor()">Player 2 Color</button>
+        <br><br>
+        <button onclick="game.resetGame()">Reset Game</button>
+    </div>
     <div id="playerIdentifier">Player 1's Turn</div>
     <div id="container">
-        <p>Number of pieces left for Player 1: </p>
-        <p id="P1Pieces"></p>
+        <div>
+            <p>Number of pieces left for Player 1: </p>
+            <p id="P1Pieces"></p>
+        </div>
         <table id="board">
             <tr>
                 <td></td>
@@ -152,8 +158,10 @@
                 <td class="whiteSpace"></td>
                 <td></td>
         </table>
-        <p>Number of Pieces left for Player 2: </p>
-        <p id="P2Pieces"></p>
+        <div>
+            <p>Number of pieces left for Player 2: </p>
+            <p id="P2Pieces"></p>
+        </div>
     </div>
     <button onclick="game.resetGame()">Reset Game</button>
     <p id="timer"></p>

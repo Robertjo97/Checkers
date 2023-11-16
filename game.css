@@ -97,9 +97,13 @@ input[type="color"] {
     margin: 5px;
 }
 
-#board {
-    margin-left: 500px;
+#container {
+    margin: auto;
 }
+
+/* #board {
+    margin-left: 500px;
+} */
 
 .whiteSpace {
     background-color: white;
@@ -148,4 +152,29 @@ a {
 a:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+select {
+    padding: 10px 15px;
+    border: 2px solid #444; /* Dark grey border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #fff; /* White background */
+    font-size: 16px; /* Larger font size */
+    color: #333; /* Dark grey text */
+    cursor: pointer; /* Change cursor to indicate it's selectable */
+    outline: none; /* Remove the default focus outline */
+    -webkit-appearance: none; /* Removes default styling on iOS */
+    -moz-appearance: none; /* Removes default styling on Firefox */
+    appearance: none; /* Removes default arrow in modern browsers */
+}
+
+select {
+    background: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat;
+    background-position: right 10px top 50%; /* Position the arrow to the right */
+    background-size: 12px; /* Size of the arrow */
+}
+
+select:focus {
+    border-color: #555;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2); /* Add a subtle shadow on focus */
 }

@@ -102,16 +102,24 @@ class Player {
     playerOneColor() {          // handles the color switching for player 1
         let color = document.getElementById('playerOneColor').value;
         let pieces = document.getElementsByClassName('playerOnePiece');
+        let kingPieces = document.getElementsByClassName('playerOnePieceKing');
         for (let i = 0; i < pieces.length; i++) {
             pieces[i].style.backgroundColor = color;
+        }
+        for (let j = 0; j < pieces.length; j++) {
+            kingPieces[j].style.backgroundColor = color;
         }
     }
 
     playerTwoColor() {          // handles the color switching for player 2
         let color = document.getElementById('playerTwoColor').value;
         let pieces = document.getElementsByClassName('playerTwoPiece');
+        let kingPieces = document.getElementsByClassName('playerTwoPieceKing');
         for (let i = 0; i < pieces.length; i++) {
             pieces[i].style.backgroundColor = color;
+        }
+        for (let j = 0; j < pieces.length; j++) {
+            kingPieces[j].style.backgroundColor = color;
         }
     }
 }
@@ -332,7 +340,8 @@ class Board {
                     if (captureTargetRow >= 0 && captureTargetRow < 8 && captureTargetCol >= 0 && captureTargetCol < 8) {
                         const captureTargetTile = this.board.rows[captureTargetRow].cells[captureTargetCol];
         
-                        if (!captureTargetTile.querySelector('.playerOnePiece') && !captureTargetTile.querySelector('.playerTwoPiece')) {
+                        if (!captureTargetTile.querySelector('.playerOnePiece') && !captureTargetTile.querySelector('.playerTwoPiece') &&
+                            !captureTargetTile.querySelector('.playerOnePieceKing' ) && !captureTargetTile.querySelector('playerTwoPieceKing')) {
                             captureTargetTile.style.backgroundColor = 'green';
                             captureTargetTile.classList.add('highlight');
                             captureTargetTile.addEventListener('click', this.clickedTile);
