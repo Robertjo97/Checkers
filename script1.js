@@ -18,10 +18,13 @@ class Game {                    //8 x 8 board
             else {
                 document.getElementById('playerIdentifier').innerHTML = "Player 2's Turn";
             }
-        } else {
-            this.currentPlayer = this.playerOne;
-            document.getElementById('playerIdentifier').innerHTML = "Player 1's Turn";
         }
+    }
+    sendPlayerData(categoryOneName, valOne, categoryTwoName, valTwo, categoryThreeName, valThree, categoryFourName, valFour, categoryFiveName, valFive) {
+        let playerData = new XMLHttpRequest();
+        playerData.open('POST', './gameData.php');
+        playerData.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        playerData.send(categoryOneName + '=' + valOne + '&' + categoryTwoName + '=' + valTwo + '&' + categoryThreeName + '=' + valThree + '&' + categoryFourName + '=' + valFour + '&' + categoryFiveName + '=' + valFive);
     }
 
     cpuMove() {
@@ -53,9 +56,11 @@ class Game {                    //8 x 8 board
         if(this.playerOne.pieces.length === 0) {                //checks if player 1 has any pieces left 
             alert("Player 2 wins! Player 1 has no more pieces left.");
             console.log("Player 2 wins! Player 1 has no more pieces left.");
+            this.sendPlayerData('username', 'Rob', 'totalScore', 12 - this.playerTwo.pieces.length, 'win', 'false', 'timePlayed', timeInSecs, 'opScore', 12);
         } else if (this.playerTwo.pieces.length === 0) {        //checks if player 2 has any pieces left
             alert("Player 1 wins! Player 2 has no more pieces left.");
             console.log("Player 1 wins! Player 2 has no more pieces left.");
+            this.sendPlayerData('username', 'Rob', 'totalScore', 12, 'win', 'true', 'timePlayed', timeInSecs, 'opScore', 12 - this.playerOne.pieces.length);
         }
         else {                                                  //checks if a player can not make any moves.
             let possibleMoves = this.board.getAllPossibleMoves(this.currentPlayer);
@@ -125,7 +130,7 @@ class Player {
     }
 
     displayNumOfPieces() {              //displays the number of pieces the player has left
-        if (this.name === "Player 1"){  //player one pieces
+        if (this.name === "Player 1") {  //player one pieces
             document.getElementById("P1Pieces").innerHTML = this.pieces.length;
         }
         else if (this.name === "Player 2") {    //player 2 pieces
@@ -393,7 +398,7 @@ class Board {
             this.selectedTile.style.backgroundColor = '#323232';
             this.selectedTile = null;
         }
-    
+
         const highlightedTiles = document.querySelectorAll('.highlight');
         highlightedTiles.forEach(tile => {
             tile.style.backgroundColor = '#323232';
@@ -497,6 +502,7 @@ class Board {
                     }
                 }
             }
+        }
     }
 
     //highlights moves for normal pieces
@@ -557,12 +563,12 @@ class Board {
             let rowCells = board.rows[i].cells;
             for (let j = 0; j < 8; j++) {
                 if (i === 1) {
-                    if (j % 2 !== 0){
-                    const piece = new Piece(game.playerTwo.name, i, j);
-                    game.playerTwo.addPiece(piece);
-                    rowCells[j].innerHTML = "<div class='playerTwoPiece' onclick='game.board.selectPiece(this)'></div>";
+                    if (j % 2 !== 0) {
+                        const piece = new Piece(game.playerTwo.name, i, j);
+                        game.playerTwo.addPiece(piece);
+                        rowCells[j].innerHTML = "<div class='playerTwoPiece' onclick='game.board.selectPiece(this)'></div>";
                     }
-                } else if (j % 2 === 0){
+                } else if (j % 2 === 0) {
                     const piece = new Piece(game.playerTwo.name, i, j);
                     game.playerTwo.addPiece(piece);
                     rowCells[j].innerHTML = "<div class='playerTwoPiece' onclick='game.board.selectPiece(this)'></div>";
@@ -576,10 +582,10 @@ class Board {
             let x = board.rows[i].cells;
             for (let j = 0; j < 8; j++) {
                 if (i === 6) {
-                    if (j % 2 === 0){
-                    const piece = new Piece(game.playerOne.name, i, j);
-                    game.playerOne.addPiece(piece);
-                    x[j].innerHTML = "<div class='playerOnePiece' onclick='game.board.selectPiece(this)'></div>";
+                    if (j % 2 === 0) {
+                        const piece = new Piece(game.playerOne.name, i, j);
+                        game.playerOne.addPiece(piece);
+                        x[j].innerHTML = "<div class='playerOnePiece' onclick='game.board.selectPiece(this)'></div>";
                     }
                 } else if (j % 2 !== 0) {
                     const piece = new Piece(game.playerOne.name, i, j);
@@ -594,7 +600,7 @@ class Board {
     BoardColorPicker() {
         let color = document.getElementById('BoardColorPicker').value;
         let whiteSpaces = document.getElementsByClassName('whiteSpace');
-    
+
         for (let i = 0; i < whiteSpaces.length; i++) {
             whiteSpaces[i].style.backgroundColor = color;
         }
@@ -625,7 +631,7 @@ class Timer {
         let x = this.secs % 60;               //the seconds left before a minute
         document.getElementById("timer").innerHTML = this.mins + ":" + this.pad(x);
     }
-    
+
     pad(val) {
         return val > 9 ? val : "0" + val;       //ternary statement if value is greater than 9, returns just val
     }
