@@ -1,0 +1,176 @@
+table {
+    margin: auto;
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid black;
+    height: 75px;
+    width: 75px;
+    background-color: rgb(50, 50, 50);
+}
+
+.whiteSpace {
+    background-color: white;
+}
+
+.playerOnePiece {
+    height: 75%;
+    width: 75%;
+    border: 2px solid white;
+    border-radius: 50%;
+    background-color: red;
+    margin: auto;
+}
+
+.playerOnePieceKing {
+    height: 75%;
+    width: 75%;
+    border: 3px solid gold;
+    border-radius: 50%;
+    background-color: red;
+    margin: auto;
+}
+
+.playerTwoPiece {
+    height: 75%;
+    width: 75%;
+    border: 2px solid white;
+    border-radius: 50%;
+    background-color: black;
+    margin: auto;
+}
+
+.playerTwoPieceKing {
+    height: 75%;
+    width: 75%;
+    border: 3px solid gold;
+    border-radius: 50%;
+    background-color: black;
+    margin: auto;
+}
+
+.highlight:hover {
+    cursor: pointer;
+}
+
+#playerIdentifier {
+    text-align: center;
+    font-size: xx-large;
+    margin:10px;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+ button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#buttons-container {
+    float: left;
+    text-align: left;
+    padding-left: 20px;
+    margin-top: 200px
+}
+
+
+input[type="color"] {
+    padding: 5px;
+    margin: 5px;
+}
+
+#container {
+    margin: auto;
+}
+
+.whiteSpace {
+    background-color: white;
+}
+
+.highlight:hover, .highlight:active {
+    background-color: #81C784;
+}
+
+#timer {
+    font-size: 35px;
+    color: #333;
+    margin-top: 10px;
+}
+
+li {
+    display: inline-block;
+}
+
+ol {
+    background-color: lightgrey;
+    display:flexbox;
+}
+
+#logo {
+    height:150px;
+    width:auto;
+}
+
+ol, body {
+    margin: 0px;
+}
+
+.options {
+    font-size: larger;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    padding:10px 10px 10px 10px;
+    margin-left:50px;
+}
+
+a {
+    text-decoration: none;
+    color:black;
+}
+a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+select {
+    padding: 10px 15px;
+    border: 2px solid #444;
+    border-radius: 5px; /*makes rounded corners */
+    background-color: #fff; 
+    font-size: 16px;
+    color: #333; 
+    cursor: pointer; 
+    outline: none; /* remove the default focus outline */
+    -webkit-appearance: none; 
+    -moz-appearance: none; /*removes defulat on firefox browser*/
+    appearance: none; 
+}
+
+select {
+    background: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat;
+    background-position: right 10px top 50%; 
+    background-size: 12px; 
+}
+
+select:focus {
+    border-color: #555;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2); 
+}

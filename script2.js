@@ -1,4 +1,4 @@
-class Game {                    //8 x 8 board
+class Game {                //10 x 10 board
     constructor() {
         this.playerOne = new Player('Player 1', 'playerOnePiece');      //player 1
         this.playerTwo = new Player('Player 2', 'playerTwoPiece');      //player 2
@@ -11,13 +11,8 @@ class Game {                    //8 x 8 board
     switchPlayer() {                                //switches player back and forth
         if (this.currentPlayer === this.playerOne) {
             this.currentPlayer = this.playerTwo;
-            if (isCPU) {             //checks if player two is a CPU
-                document.getElementById('playerIdentifier').innerHTML = "Player 2's Turn";
-                setTimeout(() => this.cpuMove(), 500);      //makes it look like cpu is thinking
-            }
-            else {
-                document.getElementById('playerIdentifier').innerHTML = "Player 2's Turn";
-            }
+            document.getElementById('playerIdentifier').innerHTML = "Player 2's Turn";
+            setTimeout(() => this.cpuMove(), 500);      //makes it look like cpu is thinking for half a second
         } else {
             this.currentPlayer = this.playerOne;
             document.getElementById('playerIdentifier').innerHTML = "Player 1's Turn";
@@ -85,7 +80,7 @@ class Game {                    //8 x 8 board
         let board = document.getElementById('board');
         for (let i = 0; i < board.rows.length; i++) {
             let x = board.rows[i].cells;
-            for (let j = 0; j < 8; j++) {
+            for (let j = 0; j < 10; j++) {
                 x[j].innerHTML = "";
             }
         }
@@ -102,11 +97,10 @@ class Game {                    //8 x 8 board
 }
 
 class Player {
-    constructor(name, pieceClass, cpu) {
+    constructor(name, pieceClass) {
         this.name = name;
         this.pieceClass = pieceClass;
         this.pieces = [];
-        this.isCPU = cpu;
     }
 
     addPiece(piece) {                   // this adds pieces to the pieces array by pushing
@@ -136,24 +130,16 @@ class Player {
     playerOneColor() {          // handles the color switching for player 1
         let color = document.getElementById('playerOneColor').value;
         let pieces = document.getElementsByClassName('playerOnePiece');
-        let kingPieces = document.getElementsByClassName('playerOnePieceKing');
         for (let i = 0; i < pieces.length; i++) {
             pieces[i].style.backgroundColor = color;
-        }
-        for (let j = 0; j < pieces.length; j++) {
-            kingPieces[j].style.backgroundColor = color;
         }
     }
 
     playerTwoColor() {          // handles the color switching for player 2
         let color = document.getElementById('playerTwoColor').value;
         let pieces = document.getElementsByClassName('playerTwoPiece');
-        let kingPieces = document.getElementsByClassName('playerTwoPieceKing');
         for (let i = 0; i < pieces.length; i++) {
             pieces[i].style.backgroundColor = color;
-        }
-        for (let j = 0; j < pieces.length; j++) {
-            kingPieces[j].style.backgroundColor = color;
         }
     }
 }
@@ -164,9 +150,10 @@ class Board {
         this.selectedPiece = null;
         this.pieceRow = 0;
         this.pieceCol = 0;
-        this.board = document.getElementById('board'); // gets the board from page
-        this.clickedTile = this.clickedTile.bind(this); // binds the clickedTile function to the current context
+        this.board = document.getElementById('board'); // Gets the board from HTML
+        this.clickedTile = this.clickedTile.bind(this); // Bind the clickedTile function to the current context
     }
+
     /* CPU RELATED FUNCTIONS START HERE */
     executeMove(move) {
         const pieceToMove = game.currentPlayer.pieces[move.pieceIndex];
@@ -185,7 +172,7 @@ class Board {
             this.removePieceAt(move.captured); 
         }
     
-        // check if the piece should be kinged
+        // Check if the piece should be kinged
         this.checkForKing(pieceToMove);
     
         // switch players and display number of pieces
@@ -261,8 +248,8 @@ class Board {
             let newRow = piece.position.row + dx;
             let newCol = piece.position.col + dy;
     
-            // if it is within bounds of the 8x8 board
-            if (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
+            // if it is within bounds of the 10x10 board
+            if (newRow >= 0 && newRow < 10 && newCol >= 0 && newCol < 10) {
                 let potentialMove = this.board.rows[newRow].cells[newCol];
                 // checks if move is even legal
                 if (this.isTileEmpty(potentialMove)) {
@@ -277,7 +264,7 @@ class Board {
                 else if (this.isOpponentPiece(potentialMove, player)) {
                     let jumpRow = newRow + dx;
                     let jumpCol = newCol + dy;
-                    if (jumpRow >= 0 && jumpRow < 8 && jumpCol >= 0 && jumpCol < 8) {
+                    if (jumpRow >= 0 && jumpRow < 10 && jumpCol >= 0 && jumpCol < 10) {
                         let potentialJump = this.board.rows[jumpRow].cells[jumpCol];
                         if (this.isTileEmpty(potentialJump)) {
                             legalMoves.push({
@@ -355,7 +342,7 @@ class Board {
 
             // checks if a piece made it to end of board and kings it
             if ((game.currentPlayer === game.playerOne && targetTile.parentNode.rowIndex === 0) ||
-                (game.currentPlayer === game.playerTwo && targetTile.parentNode.rowIndex === 7)) {
+                (game.currentPlayer === game.playerTwo && targetTile.parentNode.rowIndex === 9)) {
     
                 if (pieceIndex !== -1) {
                     player.pieces[pieceIndex].kingPiece();
@@ -417,19 +404,19 @@ class Board {
             p => p.position.row === this.pieceRow && p.position.col === this.pieceCol
         );
             
-            if (!game.currentPlayer.pieces[pieceIndex].isKing) {        //checks if the piece is not a king piece
+            if (!game.currentPlayer.pieces[pieceIndex].isKing) {        //checks if the piece is a king piece
                 if (game.currentPlayer === game.playerOne) {            //player 1's possible moves highlighted
                     if (this.pieceCol > 0 && this.pieceRow > 0) {       //up the baord
                         this.highlightMove(this.pieceRow - 1, this.pieceCol - 1);  // calls highlightMove 
                     }
-                    if (this.pieceCol < 7 && this.pieceRow > 0) {
+                    if (this.pieceCol < 9 && this.pieceRow > 0) {
                         this.highlightMove(this.pieceRow - 1, this.pieceCol + 1);  // calls highlightMove 
                     }
                 } else {                                                //player 2's possible moves highlighted
-                    if (this.pieceCol > 0 && this.pieceRow < 7) {       //down the board
+                    if (this.pieceCol > 0 && this.pieceRow < 9) {       //down the board
                         this.highlightMove(this.pieceRow + 1, this.pieceCol - 1);  // calls highlightMove 
                     }
-                    if (this.pieceCol < 7 && this.pieceRow < 7) {
+                    if (this.pieceCol < 9 && this.pieceRow < 9) {
                         this.highlightMove(this.pieceRow + 1, this.pieceCol + 1);  // calls highlightMove
                     }
                 }
@@ -439,26 +426,26 @@ class Board {
                     if (this.pieceCol > 0 && this.pieceRow > 0){
                         this.highlightKingMove(this.pieceRow - 1, this.pieceCol - 1);   //up left highlight
                     }
-                    if (this.pieceCol < 7 && this.pieceRow > 0) {
+                    if (this.pieceCol < 9 && this.pieceRow > 0) {
                         this.highlightKingMove(this.pieceRow - 1, this.pieceCol + 1);   //up right highlight
                     }
-                    if (this.pieceCol > 0 && this.pieceRow < 7) {
+                    if (this.pieceCol > 0 && this.pieceRow < 9) {
                         this.highlightKingMove(this.pieceRow + 1, this.pieceCol - 1);   //down left highlight
                     }
-                    if (this.pieceCol < 7 && this.pieceRow < 7) {
+                    if (this.pieceCol < 9 && this.pieceRow < 9) {
                         this.highlightKingMove(this.pieceRow + 1, this.pieceCol + 1);   //down right highlight
                     }
                 } else {                                                //calculates player 2's king possible moves
                     if (this.pieceCol > 0 && this.pieceRow > 0){
                         this.highlightKingMove(this.pieceRow - 1, this.pieceCol - 1);   //up left highlight
                     }
-                    if (this.pieceCol < 7 && this.pieceRow > 0) {
+                    if (this.pieceCol < 9 && this.pieceRow > 0) {
                         this.highlightKingMove(this.pieceRow - 1, this.pieceCol + 1);   //up right highlight
                     }
-                    if (this.pieceCol > 0 && this.pieceRow < 7) {
+                    if (this.pieceCol > 0 && this.pieceRow < 9) {
                         this.highlightKingMove(this.pieceRow + 1, this.pieceCol - 1);   //down left highlight
                     }
-                    if (this.pieceCol < 7 && this.pieceRow < 7) {
+                    if (this.pieceCol < 9 && this.pieceRow < 9) {
                         this.highlightKingMove(this.pieceRow + 1, this.pieceCol + 1);   //down right highlight
                     }
                 }
@@ -485,7 +472,7 @@ class Board {
                     const captureTargetCol = col + (col - this.pieceCol);
         
                     // check if the capture target tile is within the range and is empty
-                    if (captureTargetRow >= 0 && captureTargetRow < 8 && captureTargetCol >= 0 && captureTargetCol < 8) {
+                    if (captureTargetRow >= 0 && captureTargetRow < 10 && captureTargetCol >= 0 && captureTargetCol < 10) {
                         const captureTargetTile = this.board.rows[captureTargetRow].cells[captureTargetCol];
         
                         if (!captureTargetTile.querySelector('.playerOnePiece') && !captureTargetTile.querySelector('.playerTwoPiece') &&
@@ -518,11 +505,11 @@ class Board {
                     const captureTargetCol = col + (col - this.pieceCol);
         
                     // check if the capture target tile is within the range and is empty
-                    if (captureTargetRow >= 0 && captureTargetRow < 8 && captureTargetCol >= 0 && captureTargetCol < 8) {
+                    if (captureTargetRow >= 0 && captureTargetRow < 10 && captureTargetCol >= 0 && captureTargetCol < 10) {
                         const captureTargetTile = this.board.rows[captureTargetRow].cells[captureTargetCol];
         
                         if (!captureTargetTile.querySelector('.playerOnePiece') && !captureTargetTile.querySelector('.playerTwoPiece') &&
-                            !captureTargetTile.querySelector('.playerOnePieceKing' ) && !captureTargetTile.querySelector('.playerTwoPieceKing')) {
+                            !captureTargetTile.querySelector('.playerOnePieceKing') && !captureTargetTile.querySelector('.playerTwoPieceKing')) {
                             captureTargetTile.style.backgroundColor = 'green';
                             captureTargetTile.classList.add('highlight');
                             captureTargetTile.addEventListener('click', this.clickedTile);
@@ -553,10 +540,10 @@ class Board {
         let board = document.getElementById('board'); // gets the board from the HTML table
 
         // Player 2 pieces
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 4; i++) {
             let rowCells = board.rows[i].cells;
-            for (let j = 0; j < 8; j++) {
-                if (i === 1) {
+            for (let j = 0; j < 10; j++) {
+                if (i % 2 !== 0) {
                     if (j % 2 !== 0){
                     const piece = new Piece(game.playerTwo.name, i, j);
                     game.playerTwo.addPiece(piece);
@@ -572,10 +559,10 @@ class Board {
         game.playerTwo.displayNumOfPieces();
 
         // Player 1 pieces
-        for (let i = 5; i < 8; i++) {
+        for (let i = 6; i < 10; i++) {
             let x = board.rows[i].cells;
-            for (let j = 0; j < 8; j++) {
-                if (i === 6) {
+            for (let j = 0; j < 10; j++) {
+                if (i % 2 === 0) {
                     if (j % 2 === 0){
                     const piece = new Piece(game.playerOne.name, i, j);
                     game.playerOne.addPiece(piece);
@@ -630,6 +617,7 @@ class Timer {
         return val > 9 ? val : "0" + val;       //ternary statement if value is greater than 9, returns just val
     }
 }
+
 var isCPU;
 function setCPU() {
     let option = document.getElementById("gameBoardSelect").value;
