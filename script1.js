@@ -19,6 +19,10 @@ class Game {                    //8 x 8 board
                 document.getElementById('playerIdentifier').innerHTML = "Player 2's Turn";
             }
         }
+        else {
+            this.currentPlayer = this.playerOne;
+            document.getElementById('playerIdentifier').innerHTML = "Player 1's Turn";
+        }
     }
     sendPlayerData(categoryOneName, valOne, categoryTwoName, valTwo, categoryThreeName, valThree, categoryFourName, valFour, categoryFiveName, valFive) {
         let playerData = new XMLHttpRequest();
@@ -53,6 +57,7 @@ class Game {                    //8 x 8 board
     }
 
     checkWin() {
+        let timeInSecs = this.timer.mins * 60 + this.timer.secs;
         if (this.playerOne.pieces.length === 0) {                //checks if player 1 has any pieces left 
             alert("Player 2 wins! Player 1 has no more pieces left.");
             console.log("Player 2 wins! Player 1 has no more pieces left.");
@@ -504,106 +509,106 @@ class Board {
         }
     }
 
-//highlights moves for normal pieces
-highlightMove(row, col) {
-    let tile = this.board.rows[row].cells[col];  // refers to the instance variable (const game)
-    if (!tile.querySelector('.playerOnePiece') && !tile.querySelector('.playerTwoPiece') &&       //if the tiles are empty, highlight green
-        !tile.querySelector('.playerOnePieceKing') && !tile.querySelector('.playerTwoPieceKing')) {
-        tile.style.backgroundColor = 'green';
-        tile.classList.add('highlight');
-        tile.addEventListener('click', this.clickedTile);  //attaches event to highlighted tiles, then calls clickedTile with that event.
-    } else if (tile.querySelector('.playerOnePiece') || tile.querySelector('.playerTwoPiece') ||
-        tile.querySelector('.playerOnePieceKing') || tile.querySelector('.playerTwoPieceKing')) {
-        const opponentPiece = tile.querySelector('.playerOnePiece') || tile.querySelector('.playerTwoPiece') ||
-            tile.querySelector('.playerOnePieceKing') || tile.querySelector('.playerTwoPieceKing');
-        const opponent = game.currentPlayer === game.playerOne ? game.playerTwo : game.playerOne;
-        // checks if the target tile contains an opponent piece and is capturable
-        if (opponentPiece && this.isCapturableTile(row, col)) {
-            const captureTargetRow = row + (row - this.pieceRow);
-            const captureTargetCol = col + (col - this.pieceCol);
+    //highlights moves for normal pieces
+    highlightMove(row, col) {
+        let tile = this.board.rows[row].cells[col];  // refers to the instance variable (const game)
+        if (!tile.querySelector('.playerOnePiece') && !tile.querySelector('.playerTwoPiece') &&       //if the tiles are empty, highlight green
+            !tile.querySelector('.playerOnePieceKing') && !tile.querySelector('.playerTwoPieceKing')) {
+            tile.style.backgroundColor = 'green';
+            tile.classList.add('highlight');
+            tile.addEventListener('click', this.clickedTile);  //attaches event to highlighted tiles, then calls clickedTile with that event.
+        } else if (tile.querySelector('.playerOnePiece') || tile.querySelector('.playerTwoPiece') ||
+            tile.querySelector('.playerOnePieceKing') || tile.querySelector('.playerTwoPieceKing')) {
+            const opponentPiece = tile.querySelector('.playerOnePiece') || tile.querySelector('.playerTwoPiece') ||
+                tile.querySelector('.playerOnePieceKing') || tile.querySelector('.playerTwoPieceKing');
+            const opponent = game.currentPlayer === game.playerOne ? game.playerTwo : game.playerOne;
+            // checks if the target tile contains an opponent piece and is capturable
+            if (opponentPiece && this.isCapturableTile(row, col)) {
+                const captureTargetRow = row + (row - this.pieceRow);
+                const captureTargetCol = col + (col - this.pieceCol);
 
-            // check if the capture target tile is within the range and is empty
-            if (captureTargetRow >= 0 && captureTargetRow < 8 && captureTargetCol >= 0 && captureTargetCol < 8) {
-                const captureTargetTile = this.board.rows[captureTargetRow].cells[captureTargetCol];
+                // check if the capture target tile is within the range and is empty
+                if (captureTargetRow >= 0 && captureTargetRow < 8 && captureTargetCol >= 0 && captureTargetCol < 8) {
+                    const captureTargetTile = this.board.rows[captureTargetRow].cells[captureTargetCol];
 
-                if (!captureTargetTile.querySelector('.playerOnePiece') && !captureTargetTile.querySelector('.playerTwoPiece') &&
-                    !captureTargetTile.querySelector('.playerOnePieceKing') && !captureTargetTile.querySelector('.playerTwoPieceKing')) {
-                    captureTargetTile.style.backgroundColor = 'green';
-                    captureTargetTile.classList.add('highlight');
-                    captureTargetTile.addEventListener('click', this.clickedTile);
+                    if (!captureTargetTile.querySelector('.playerOnePiece') && !captureTargetTile.querySelector('.playerTwoPiece') &&
+                        !captureTargetTile.querySelector('.playerOnePieceKing') && !captureTargetTile.querySelector('.playerTwoPieceKing')) {
+                        captureTargetTile.style.backgroundColor = 'green';
+                        captureTargetTile.classList.add('highlight');
+                        captureTargetTile.addEventListener('click', this.clickedTile);
+                    }
                 }
             }
         }
     }
-}
 
-isCapturableTile(row, col) {                    // sees if a title is capturable
-    const opponent = game.currentPlayer === game.playerOne ? game.playerTwo : game.playerOne;
+    isCapturableTile(row, col) {                    // sees if a title is capturable
+        const opponent = game.currentPlayer === game.playerOne ? game.playerTwo : game.playerOne;
 
-    // check if there is an opponent piece on the target tile and finds its index
-    const opponentPieceIndex = opponent.pieces.findIndex(
-        p => p.position.row === row && p.position.col === col
-    );
+        // check if there is an opponent piece on the target tile and finds its index
+        const opponentPieceIndex = opponent.pieces.findIndex(
+            p => p.position.row === row && p.position.col === col
+        );
 
-    //if the opponent piece on the target tile is capturable
-    return opponentPieceIndex !== -1;
-}
+        //if the opponent piece on the target tile is capturable
+        return opponentPieceIndex !== -1;
+    }
 
-clickedTile(e) {                                //listens for when the player clicks a green tile and proceeds to move the piece
-    const targetTile = e.target;
-    this.movePiece(this.selectedTile, targetTile);
-}
+    clickedTile(e) {                                //listens for when the player clicks a green tile and proceeds to move the piece
+        const targetTile = e.target;
+        this.movePiece(this.selectedTile, targetTile);
+    }
 
-generatePieces() {
-    let board = document.getElementById('board'); // gets the board from the HTML table
+    generatePieces() {
+        let board = document.getElementById('board'); // gets the board from the HTML table
 
-    // Player 2 pieces
-    for (let i = 0; i < 3; i++) {
-        let rowCells = board.rows[i].cells;
-        for (let j = 0; j < 8; j++) {
-            if (i === 1) {
-                if (j % 2 !== 0) {
+        // Player 2 pieces
+        for (let i = 0; i < 3; i++) {
+            let rowCells = board.rows[i].cells;
+            for (let j = 0; j < 8; j++) {
+                if (i === 1) {
+                    if (j % 2 !== 0) {
+                        const piece = new Piece(game.playerTwo.name, i, j);
+                        game.playerTwo.addPiece(piece);
+                        rowCells[j].innerHTML = "<div class='playerTwoPiece' onclick='game.board.selectPiece(this)'></div>";
+                    }
+                } else if (j % 2 === 0) {
                     const piece = new Piece(game.playerTwo.name, i, j);
                     game.playerTwo.addPiece(piece);
                     rowCells[j].innerHTML = "<div class='playerTwoPiece' onclick='game.board.selectPiece(this)'></div>";
                 }
-            } else if (j % 2 === 0) {
-                const piece = new Piece(game.playerTwo.name, i, j);
-                game.playerTwo.addPiece(piece);
-                rowCells[j].innerHTML = "<div class='playerTwoPiece' onclick='game.board.selectPiece(this)'></div>";
             }
         }
-    }
-    game.playerTwo.displayNumOfPieces();
+        game.playerTwo.displayNumOfPieces();
 
-    // Player 1 pieces
-    for (let i = 5; i < 8; i++) {
-        let x = board.rows[i].cells;
-        for (let j = 0; j < 8; j++) {
-            if (i === 6) {
-                if (j % 2 === 0) {
+        // Player 1 pieces
+        for (let i = 5; i < 8; i++) {
+            let x = board.rows[i].cells;
+            for (let j = 0; j < 8; j++) {
+                if (i === 6) {
+                    if (j % 2 === 0) {
+                        const piece = new Piece(game.playerOne.name, i, j);
+                        game.playerOne.addPiece(piece);
+                        x[j].innerHTML = "<div class='playerOnePiece' onclick='game.board.selectPiece(this)'></div>";
+                    }
+                } else if (j % 2 !== 0) {
                     const piece = new Piece(game.playerOne.name, i, j);
                     game.playerOne.addPiece(piece);
                     x[j].innerHTML = "<div class='playerOnePiece' onclick='game.board.selectPiece(this)'></div>";
                 }
-            } else if (j % 2 !== 0) {
-                const piece = new Piece(game.playerOne.name, i, j);
-                game.playerOne.addPiece(piece);
-                x[j].innerHTML = "<div class='playerOnePiece' onclick='game.board.selectPiece(this)'></div>";
             }
         }
+        game.playerOne.displayNumOfPieces();
     }
-    game.playerOne.displayNumOfPieces();
-}
 
-BoardColorPicker() {
-    let color = document.getElementById('BoardColorPicker').value;
-    let whiteSpaces = document.getElementsByClassName('whiteSpace');
+    BoardColorPicker() {
+        let color = document.getElementById('BoardColorPicker').value;
+        let whiteSpaces = document.getElementsByClassName('whiteSpace');
 
-    for (let i = 0; i < whiteSpaces.length; i++) {
-        whiteSpaces[i].style.backgroundColor = color;
+        for (let i = 0; i < whiteSpaces.length; i++) {
+            whiteSpaces[i].style.backgroundColor = color;
+        }
     }
-}
 }
 
 class Piece {
