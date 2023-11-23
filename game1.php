@@ -14,7 +14,14 @@
             <li class="options"><a href="./leaderboard.html">Leaderboard</a></li>
             <li class="options"><a href="./contact.html">Contact</a></li>
             <li class="options"><a href="./help.html">Help</a></li>
-            <li class="options"><a href="./login.html">Log in/Register</a></li>
+            <?php
+            session_start();
+            if (isset($_SESSION["username"]) && $_SESSION["username"] != null) {
+                echo '<li class="options">Welcome, ' . htmlspecialchars($_SESSION["username"]) . '</li>';
+            } else {
+                echo '<li class="options"><a href="./login.html">Log in/Register</a></li>';
+            }
+            ?>
         </ol>
         <!--bulldog logo to go home, leaderboard, contact, help -->
     </header>

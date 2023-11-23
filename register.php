@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $id = $conn->insert_id;
                     $_SESSION["username"] = $user;
                     $_SESSION["user_id"] = $id;
-                    header("Location: ./game1.php");
+                    header("Location: ./menu.php");
                     exit;
                 } else {
                     echo "Error: " . $insertstmt->error;
