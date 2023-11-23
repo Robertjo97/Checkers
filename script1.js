@@ -11,8 +11,13 @@ class Game {                    //8 x 8 board
     switchPlayer() {                                //switches player back and forth
         if (this.currentPlayer === this.playerOne) {
             this.currentPlayer = this.playerTwo;
-            document.getElementById('playerIdentifier').innerHTML = "Player 2's Turn";
-            setTimeout(() => this.cpuMove(), 500);      //makes it look like cpu is thinking
+            if (isCPU) {             //checks if player two is a CPU
+                document.getElementById('playerIdentifier').innerHTML = "Player 2's Turn";
+                setTimeout(() => this.cpuMove(), 500);      //makes it look like cpu is thinking
+            }
+            else {
+                document.getElementById('playerIdentifier').innerHTML = "Player 2's Turn";
+            }
         } else {
             this.currentPlayer = this.playerOne;
             document.getElementById('playerIdentifier').innerHTML = "Player 1's Turn";
@@ -30,7 +35,6 @@ class Game {                    //8 x 8 board
                 this.board.executeMove(bestMove);       //executes move for the CPU
             }
         }
-        this.checkWin();                                //scans pieces array to see if a player has won
     }
 
     chooseBestCapture(possibleMoves) {
@@ -53,9 +57,12 @@ class Game {                    //8 x 8 board
             alert("Player 1 wins! Player 2 has no more pieces left.");
             console.log("Player 1 wins! Player 2 has no more pieces left.");
         }
-        // else {
-        //     console.log("Player " + (this.currentPlayer === this.playerOne ? "2" : "1") + " wins! The opponent cannot make any moves.");
-        // }
+        else {                                                  //checks if a player can not make any moves.
+            let possibleMoves = this.board.getAllPossibleMoves(this.currentPlayer);
+            if (possibleMoves.length === 0){
+                alert("Player " + (this.currentPlayer === this.playerOne ? "2" : "1") + " wins! The opponent cannot make any more moves.");
+            }
+        }
     }
 
     winningPlayer() {
@@ -95,10 +102,11 @@ class Game {                    //8 x 8 board
 }
 
 class Player {
-    constructor(name, pieceClass) {
+    constructor(name, pieceClass, cpu) {
         this.name = name;
         this.pieceClass = pieceClass;
         this.pieces = [];
+        this.isCPU = cpu;
     }
 
     addPiece(piece) {                   // this adds pieces to the pieces array by pushing
@@ -177,12 +185,14 @@ class Board {
             this.removePieceAt(move.captured); 
         }
     
-        // Check if the piece should be kinged
+        // check if the piece should be kinged
         this.checkForKing(pieceToMove);
     
         // switch players and display number of pieces
         game.playerTwo.displayNumOfPieces();
         game.playerOne.displayNumOfPieces();
+        game.winningPlayer();
+        game.checkWin();
         game.switchPlayer();
     }
 
@@ -620,5 +630,17 @@ class Timer {
         return val > 9 ? val : "0" + val;       //ternary statement if value is greater than 9, returns just val
     }
 }
-
+var isCPU;
+function setCPU() {
+    let option = document.getElementById("gameBoardSelect").value;
+    if (option == "true"){
+        isCPU = true;
+    }
+    else {
+        isCPU = false;
+    }
+    document.getElementById("option").style.display = "none";
+    document.getElementById("gameBoard").style.display = "inline";
+    game.resetGame();
+}
 const game = new Game();                        // makes a game instance

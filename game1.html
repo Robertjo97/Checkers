@@ -19,112 +19,123 @@
         <!--bulldog logo to go home, leaderboard, contact, help -->
     </header>
     <h1>CHECKERS</h1>
-    <div id="buttons-container">
-        <input id="BoardColorPicker" type="color">
-        <button type="button" onclick="game.board.BoardColorPicker()">Change Board Color</button>
-        <br><br>
-        <input id="playerOneColor" type="color">
-        <button type="button" onclick="game.playerOne.playerOneColor()">Player 1 Color</button>
-        <br><br>
-        <input id="playerTwoColor" type="color">
-        <button type="button" onclick="game.playerTwo.playerTwoColor()">Player 2 Color</button>
-        <br><br>
-        <button onclick="game.resetGame()">Reset Game</button>
-    </div>
-    <div id="playerIdentifier">Player 1's Turn</div>
-    <div id="container">
-        <div>
-            <p>Number of pieces left for Player 1: </p>
-            <p id="P1Pieces"></p>
+    <section id="option" style="display:inline">
+        <h2>Select Game Mode:</h2>
+        <select id="gameBoardSelect">
+            <option value=true>Single Player</option> 
+            <option value=false>Two Player</option>
+        </select><br>
+        <button onclick="setCPU()">Start Game</button>
+    </section>
+
+    <section style="display:none" id="gameBoard">
+        <div id="buttons-container">
+            <input id="BoardColorPicker" type="color">
+            <button type="button" onclick="game.board.BoardColorPicker()">Change Board Color</button>
+            <br><br>
+            <input id="playerOneColor" type="color">
+            <button type="button" onclick="game.playerOne.playerOneColor()">Change Player 1 Color</button>
+            <br><br>
+            <input id="playerTwoColor" type="color">
+            <button type="button" onclick="game.playerTwo.playerTwoColor()">Change Player 2 Color</button>
+            <br><br>
+            <button onclick="game.resetGame()">Reset Game</button>
         </div>
-        <table id="board">
-            <tr>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-            </tr>
-            <tr>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-            </tr>
-            <tr>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-            </tr>
-            <tr>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-            </tr>
-            <tr>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-                <td class="whiteSpace"></td>
-                <td></td>
-            </tr>
-        </table>
-        <div>
-            <p>Number of pieces left for Player 2: </p>
-            <p id="P2Pieces"></p>
-        </div>
-    </div>
-    <p id="timer">0:00</p>
+            <div id="playerIdentifier">Player 1's Turn</div>
+            <div id="container">
+                <div>
+                    <p>Number of pieces left for Player 1: </p>
+                    <p id="P1Pieces"></p>
+                </div>
+                <table id="board">
+                    <tr>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                    </tr>
+                    <tr>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                    </tr>
+                    <tr>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                    </tr>
+                    <tr>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                    </tr>
+                    <tr>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                        <td class="whiteSpace"></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <div>
+                    <p>Number of pieces left for Player 2: </p>
+                    <p id="P2Pieces"></p>
+                </div>
+            </div>
+            <p id="timer">0:00</p>
+    </section>
     <script src="./script1.js"></script>
 </body>
 </html>

@@ -30,7 +30,6 @@ class Game {                //10 x 10 board
                 this.board.executeMove(bestMove);       //executes move for the CPU
             }
         }
-        this.checkWin();                                //scans pieces array to see if a player has won
     }
 
     chooseBestCapture(possibleMoves) {
@@ -53,9 +52,12 @@ class Game {                //10 x 10 board
             alert("Player 1 wins! Player 2 has no more pieces left.");
             console.log("Player 1 wins! Player 2 has no more pieces left.");
         }
-        // else {
-        //     console.log("Player " + (this.currentPlayer === this.playerOne ? "2" : "1") + " wins! The opponent cannot make any moves.");
-        // }
+        else {                                                  //checks if a player can not make any moves.
+            let possibleMoves = this.board.getAllPossibleMoves(this.currentPlayer);
+            if (possibleMoves.length === 0){
+                alert("Player " + (this.currentPlayer === this.playerOne ? "2" : "1") + " wins! The opponent cannot make any more moves.");
+            }
+        }
     }
 
     winningPlayer() {
@@ -176,6 +178,8 @@ class Board {
         // switch players and display number of pieces
         game.playerTwo.displayNumOfPieces();
         game.playerOne.displayNumOfPieces();
+        game.winningPlayer();
+        game.checkWin();
         game.switchPlayer();
     }
 
@@ -614,4 +618,17 @@ class Timer {
     }
 }
 
+var isCPU;
+function setCPU() {
+    let option = document.getElementById("gameBoardSelect").value;
+    if (option == "true"){
+        isCPU = true;
+    }
+    else {
+        isCPU = false;
+    }
+    document.getElementById("option").style.display = "none";
+    document.getElementById("gameBoard").style.display = "inline";
+    game.resetGame();
+}
 const game = new Game();                        // makes a game instance
