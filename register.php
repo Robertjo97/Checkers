@@ -1,27 +1,55 @@
 <?php
-$rawData = file_get_contents('./users.json');
-$data = json_decode($rawData);
-$username = null;
-$password = null;
+session_start();
+$_SESSION["username"] = null;
+
+$servername = "localhost";
+$username = "Checkers";
+$password = "CSCI130Checkers_";
+$dbName = "gameData";
+$user = null;
+$pass = null;
+
+$conn = new mysqli($servername, $username, $password, $dbName);
+if($conn->connect_error){
+    die("Error: " . $conn->connect_error);
+}
+
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    if(isset($_POST['username']) && isset($_POST['password'])){
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        if($username == "" || $password == ""){
-            echo 'Error: Invalid username or password';
-            exit;
+    $user = $_POST['username'];
+    $pass = $_POST['password'];
+
+    if($user == ' ' || $pass == ' '){
+        echo "Error: invalid username or password";
+    }
+    else {
+        $sql = "SELECT * FROM users WHERE username = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $user);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        $stmt->close();
+
+        if($result->num_rows > 0) {
+            echo "Error: User already exists";
         }
-        for($i = 0; $i < count($data); $i++){
-            if($data[$i]->username == $username){
-                echo 'Error: user already exists';
-                exit;
+        else if ($result->num_rows == 0){
+            $insert = "INSERT INTO users (username, password, totalScore, gamesWon, timePlayed, gamesPlayed) VALUES (?, ?, 0, 0, 0, 0 )";
+
+            $insertstmt = $conn->prepare($insert);
+            $insertstmt->bind_param("ss", $user, $pass);
+            if($insertstmt->execute()){
+                $_SESSION["username"] = $user;
+                header("Location: ./game1.html");
             }
+            else{
+                echo "Error: " . $insertstmt->error;
+            }
+            $insertstmt->close();
         }
-        $user = array("username" => $username, 'password' => $password, 'totalScore' => 0, 'gamesWon' => 0, 'timePlayed' => 0, 'gamesPlayed' => 0, 'matchHistory' => []);
-        $data[] = $user;
-        file_put_contents('./users.json', json_encode($data));
-        header('Location: ./game1.html');
-        exit;
     }
 }
+$conn->close();
 ?>
