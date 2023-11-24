@@ -32,6 +32,6 @@
     </header>
     <div id="leaderboard"></div>
     <div id="matchHistory"></div>
-    <script src='./leaderboard.js'></script>
+    <script src='./leaderboard2.js'></script>
 </body>
 </html>
