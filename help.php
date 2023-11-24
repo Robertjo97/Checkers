@@ -11,7 +11,7 @@
         <ol>
             <li><a href="./index.php"><img src="./pics/Fresno_State_Bulldogs_logo.svg.png" id="logo" alt="Fresno state bulldog logo"></a></li>
             <li class="options"><a href="./leaderboard.php">Leaderboard</a></li>
-            <li class="options"><a href="./contact.html">Contact</a></li>
+            <li class="options"><a href="./contact.php">Contact</a></li>
             <li class="options"><a href="./help.php">Help</a></li>
             <?php
                 session_start();

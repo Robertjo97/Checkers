@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link href="./styleHome.css" type="text/css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="./game.css">
+    <title>Checkers Rules</title>
 </head>
 <body>
-    <header id="header">
+    <header>
         <ol>
             <li><a href="./index.php"><img src="./pics/Fresno_State_Bulldogs_logo.svg.png" id="logo" alt="Fresno state bulldog logo"></a></li>
             <li class="options"><a href="./leaderboard.php">Leaderboard</a></li>
@@ -25,6 +25,6 @@
         </ol>
         <!--bulldog logo to go home, leaderboard, contact, help -->
     </header>
-    <h1 id="title">Welcome to Fuckin Checkers</h1>
+    <h1>Contact</h1>
 </body>
 </html>
