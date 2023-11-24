@@ -16,10 +16,10 @@
             <?php
                 session_start();
                 if(isset($_SESSION["username"]) && $_SESSION["username"] != null){
-                    echo '<li class="options">Welcome, ' . $_SESSION["username"] . '</li>';
+                    echo '<li class="options"><a href="./logout.php">Log out</a></li>';
                 }
                 else {
-                    echo '<li class="options"><a href="./login.php">Log in/Register</a></li>';
+                    echo '<li class="options"><a href="./login.html">Log in/Register</a></li>';
                 }
             ?>
             <!--li class="options"><a href="./login.html">Log in/Register</a></li>-->
