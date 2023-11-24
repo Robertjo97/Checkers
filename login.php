@@ -33,7 +33,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($pass == $row["password"]){
                 $_SESSION["username"] = $row["username"];
                 $_SESSION["user_id"] = $row["user_id"];
-                header("Location: ./menu.php");
+                header("Location: ./index.php");
                 exit;
             }
             else {

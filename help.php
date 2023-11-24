@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="./game.css">
+    <link href="./styleHome.css" type="text/css" rel="stylesheet">
     <title>Checkers Rules</title>
 </head>
 <body>
-    <header>
+<header id="header">
         <ol>
             <li><a href="./index.php"><img src="./pics/Fresno_State_Bulldogs_logo.svg.png" id="logo" alt="Fresno state bulldog logo"></a></li>
             <li class="options"><a href="./leaderboard.php">Leaderboard</a></li>

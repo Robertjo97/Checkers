@@ -3,7 +3,7 @@ let matchHistory = document.getElementById('matchHistory');
 
 function getPlayerData(func) {
     let request = new XMLHttpRequest();
-    request.open('POST', './leaderboard.php');
+    request.open('POST', './leaderboardData.php');
     request.send();
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
