@@ -6,7 +6,6 @@ $username = 'Checkers';
 $password = 'CSCI130Checkers_';
 $dbName = 'gameData';
 
-$user = $_SESSION["username"];
 $user_id = $_SESSION["user_id"];
 
 //$numMatches = null; //going to need to query for this
