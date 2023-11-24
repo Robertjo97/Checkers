@@ -1,3 +1,52 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ced1d4; /* Light gray background */
+}
+
+#header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#header ol {
+    list-style-type: none;
+    background-color: #13284c; /* Dark navy blue background */
+    padding: 10px 0;
+    margin: 0;
+    border: none; /* Removed the black border */
+}
+
+#header li {
+    display: inline;
+    margin: 0 15px; /* Adjusted margin for uniform spacing */
+}
+
+#header li a {
+    text-decoration: none;
+    color: #ffffff; /* White text for contrast */
+    font-size: x-large;
+    font-weight: bold;
+}
+
+#header li a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #b1102b; /* Deep red for hover effect */
+}
+
+#logo {
+    height: 150px;
+    width: auto;
+}
+
+#title {
+    text-align: center;
+    color: #13284c; /* Dark navy blue for the title */
+    margin-top: 20px; /* Added margin for spacing */
+}
+
+
+/*PREVIOUS CSS STARTS HERE*/
 table {
     margin: auto;
     border-collapse: collapse;
@@ -133,13 +182,13 @@ ol, body {
     margin: 0px;
 }
 
-.options {
+/* .options {
     font-size: larger;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     padding:10px 10px 10px 10px;
     margin-left:50px;
-}
+} */
 
 a {
     text-decoration: none;
@@ -174,3 +223,4 @@ select:focus {
     border-color: #555;
     box-shadow: 0 0 5px rgba(0,0,0,0.2); 
 }
+
