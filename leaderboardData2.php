@@ -12,14 +12,15 @@ if($conn->connect_error){
 }
 
 $leaderboard = [];
-$leaderboardData = "SELECT * FROM users";
-$leaderboardResult = $conn->query($leaderboardData);
+$stmt = "SELECT * FROM users";
+$result = $conn->query($stmt);
 
-while($leaderboardRow = $leaderboardResult->fetch_assoc()){
-    $leaderboard[] = $leaderboardRow;
+while($row = $result->fetch_assoc()){
+    $leaderboard[] = $row;
 }
 
 if($_SERVER["REQUEST_METHOD"] == 'POST'){
     echo json_encode($leaderboard);
 }
+$conn->close();
 ?>
