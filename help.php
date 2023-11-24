@@ -9,11 +9,19 @@
 <body>
     <header>
         <ol>
-            <li><a href="./index.html"><img src="./pics/Fresno_State_Bulldogs_logo.svg.png" id="logo" alt="Fresno state bulldog logo"></a></li>
-            <li class="options"><a href="./leaderboard.html">Leaderboard</a></li>
+            <li><a href="./index.php"><img src="./pics/Fresno_State_Bulldogs_logo.svg.png" id="logo" alt="Fresno state bulldog logo"></a></li>
+            <li class="options"><a href="./leaderboard.php">Leaderboard</a></li>
             <li class="options"><a href="./contact.html">Contact</a></li>
-            <li class="options"><a href="./help.html">Help</a></li>
-            <li class="options"><a href="./login.html">Log in/Register</a></li>
+            <li class="options"><a href="./help.php">Help</a></li>
+            <?php
+                session_start();
+                if(isset($_SESSION["username"]) && $_SESSION["username"] != null){
+                    echo '<li class="options">Welcome, ' . $_SESSION["username"] . '</li>';
+                }
+                else {
+                    echo '<li class="options"><a href="./login.php">Log in/Register</a></li>';
+                }
+            ?>
         </ol>
         <!--bulldog logo to go home, leaderboard, contact, help -->
     </header>
