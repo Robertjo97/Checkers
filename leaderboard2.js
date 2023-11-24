@@ -7,7 +7,7 @@ function getPlayerData(func) {
     request.send();
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
-            let playerData = request.responseText;
+            let playerData = JSON.parse(request.responseText);
             func(playerData);
         }
     }
@@ -21,7 +21,7 @@ function buildTable(playerData) {
     let table = document.createElement('table');
     leaderboard.appendChild(table);
     
-    for (let i = -1; i < playerData; i++) {
+    for (let i = -1; i < playerData.length; i++) {
         let tr = document.createElement('tr');
         table.appendChild(tr);
         if (i === -1) {
@@ -32,32 +32,31 @@ function buildTable(playerData) {
                 let td = document.createElement('td');
                 switch (j) {
                     case 0:
-                        td.innerHTML = 'username';
+                        td.innerHTML = playerData[i].username;
                         tr.appendChild(td);
                         break;
 
                     case 1:
-                        td.innerHTML = 'totalScore' + ' captures';
+                        td.innerHTML = playerData[i].totalScore + ' captures';
                         tr.appendChild(td);
                         break;
 
                     case 2:
-                        td.innerHTML = 'gamesWon';
+                        td.innerHTML = playerData[i].gamesWon;
                         tr.appendChild(td);
                         break;
 
                     case 3:
-                        td.innerHTML = 'gamesPlayed';
+                        td.innerHTML = playerData[i].gamesPlayed;
                         tr.appendChild(td);
                         break;
 
                     case 4:
-                        // let rawSeconds = playerData[i].timePlayed;
-                        // let minutes = Math.floor(rawSeconds / 60);
-                        // let seconds = rawSeconds - minutes * 60;
+                        let rawSeconds = playerData[i].timePlayed;
+                        let minutes = Math.floor(rawSeconds / 60);
+                        let seconds = rawSeconds - minutes * 60;
 
-                        // td.innerHTML = minutes + ' minutes ' + seconds + ' seconds';
-                        td.innerHTML = 'timePlayed';
+                        td.innerHTML = minutes + ' minutes ' + seconds + ' seconds';
                         tr.appendChild(td);
                         break;
                 }
