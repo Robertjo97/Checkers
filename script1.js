@@ -24,11 +24,11 @@ class Game {                    //8 x 8 board
             document.getElementById('playerIdentifier').innerHTML = "Player 1's Turn";
         }
     }
-    sendPlayerData(categoryOneName, valOne, categoryTwoName, valTwo, categoryThreeName, valThree, categoryFourName, valFour, categoryFiveName, valFive) {
+    sendPlayerData(totalScore, win, timePlayed, opScore) {
         let playerData = new XMLHttpRequest();
-        playerData.open('POST', './gameData.php');
+        playerData.open('POST', './gameData2.php');
         playerData.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        playerData.send(categoryOneName + '=' + valOne + '&' + categoryTwoName + '=' + valTwo + '&' + categoryThreeName + '=' + valThree + '&' + categoryFourName + '=' + valFour + '&' + categoryFiveName + '=' + valFive);
+        playerData.send('totalScore=' + totalScore + '&win=' + win + '&timePlayed=' + timePlayed + '&opScore=' + opScore);
     }
 
     cpuMove() {
@@ -61,11 +61,11 @@ class Game {                    //8 x 8 board
         if (this.playerOne.pieces.length === 0) {                //checks if player 1 has any pieces left 
             alert("Player 2 wins! Player 1 has no more pieces left.");
             console.log("Player 2 wins! Player 1 has no more pieces left.");
-            this.sendPlayerData('username', 'Rob', 'totalScore', 12 - this.playerTwo.pieces.length, 'win', 'false', 'timePlayed', timeInSecs, 'opScore', 12);
+            this.sendPlayerData(12 - this.playerTwo.pieces.length, 'false', timeInSecs, 12);
         } else if (this.playerTwo.pieces.length === 0) {        //checks if player 2 has any pieces left
             alert("Player 1 wins! Player 2 has no more pieces left.");
             console.log("Player 1 wins! Player 2 has no more pieces left.");
-            this.sendPlayerData('username', 'Rob', 'totalScore', 12, 'win', 'true', 'timePlayed', timeInSecs, 'opScore', 12 - this.playerOne.pieces.length);
+            this.sendPlayerData(12, 'true', timeInSecs, 12 - this.playerOne.pieces.length);
         }
         else {                                                  //checks if a player can not make any moves.
             let possibleMoves = this.board.getAllPossibleMoves(this.currentPlayer);
