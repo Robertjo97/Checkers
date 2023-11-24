@@ -105,7 +105,7 @@ function buildMatchHistory(data, name) {
 
                     case 1:
                         if (data[i].winner == true) {
-                            td.innerHTML = name; //change to signed in player 
+                            td.innerHTML = name; 
                         }
                         else {
                             td.innerHTML = 'Player 2';
@@ -114,7 +114,7 @@ function buildMatchHistory(data, name) {
 
                     case 2:
                         if (data[i].winner == false) {
-                            td.innerHTML = name; //change
+                            td.innerHTML = name;
                         }
                         else {
                             td.innerHTML = 'Player 2';
