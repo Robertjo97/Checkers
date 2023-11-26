@@ -77,7 +77,7 @@ class Game {                    //8 x 8 board
                 }
                 else {
                     alert("Player 1 wins! The opponent cannot make any more moves.");
-                    this.sendPlayerData(12 - this.playerOne.pieces.length, 'true', timeInSecs, 12 - this.playerTwo.pieces.length);
+                    this.sendPlayerData(12 - this.playerTwo.pieces.length, 'true', timeInSecs, 12 - this.playerOne.pieces.length);
                     console.log('Player 1 win');
                 }
             }
