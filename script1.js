@@ -69,8 +69,17 @@ class Game {                    //8 x 8 board
         }
         else {                                                  //checks if a player can not make any moves.
             let possibleMoves = this.board.getAllPossibleMoves(this.currentPlayer);
-            if (possibleMoves.length === 0) {
-                alert("Player " + (this.currentPlayer === this.playerOne ? "2" : "1") + " wins! The opponent cannot make any more moves.");
+            if (possibleMoves.length === 0) {        
+                if(this.currentPlayer === this.playerOne) {
+                    alert("Player 2 wins! The opponent cannot make any more moves.");
+                    this.sendPlayerData(12 - this.playerTwo.pieces.length, 'false', timeInSecs, 12 - this.playerOne.pieces.length);
+                    console.log('Player 2 win');
+                }
+                else {
+                    alert("Player 1 wins! The opponent cannot make any more moves.");
+                    this.sendPlayerData(12 - this.playerOne.pieces.length, 'true', timeInSecs, 12 - this.playerTwo.pieces.length);
+                    console.log('Player 1 win');
+                }
             }
         }
     }
