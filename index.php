@@ -30,6 +30,6 @@
         </ol>
         <!--bulldog logo to go home, leaderboard, contact, help -->
     </header>
-    <h1 id="title">Welcome to Fuckin Checkers</h1>
+    <h1 id="title">Welcome to Checkers</h1>
 </body>
 </html>
