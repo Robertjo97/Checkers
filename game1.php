@@ -8,13 +8,26 @@
     <link type="text/css" rel="stylesheet" href="./game.css">
 </head>
 <body onload="game.board.generatePieces()">
-    <header>
+<header id="header">
         <ol>
-            <li><a href="./index.html"><img src="./pics/Fresno_State_Bulldogs_logo.svg.png" id="logo" alt="Fresno state bulldog logo"></a></li>
-            <li class="options"><a href="./leaderboard.html">Leaderboard</a></li>
-            <li class="options"><a href="./contact.html">Contact</a></li>
-            <li class="options"><a href="./help.html">Help</a></li>
-            <li class="options"><a href="./login.html">Log in/Register</a></li>
+            <li><a href="./index.php"><img src="./pics/Fresno_State_Bulldogs_logo.svg.png" id="logo" alt="Fresno state bulldog logo"></a></li>
+            <?php 
+                session_start();
+                if(isset($_SESSION["username"]) && $_SESSION["username"] != null){
+                    echo '<li class="options"><a href="./menu.php">Game</a></li>';
+                }
+            ?>
+            <li class="options"><a href="./leaderboard.php">Leaderboard</a></li>
+            <li class="options"><a href="./contact.php">Contact</a></li>
+            <li class="options"><a href="./help.php">Help</a></li>
+            <?php
+                if(isset($_SESSION["username"]) && $_SESSION["username"] != null){
+                    echo '<li class="options"><a href="./logout.php">Log out</a></li>';
+                }
+                else {
+                    echo '<li class="options"><a href="./login.html">Log in/Register</a></li>';
+                }
+            ?>
         </ol>
         <!--bulldog logo to go home, leaderboard, contact, help -->
     </header>

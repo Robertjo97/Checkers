@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaderboard</title>
-    <link type="text/css" rel="stylesheet" href="./leaderboard.css">
+    <title>Menu For Checkers</title>
+    <link type="text/css" rel="stylesheet" href="./styleHome.css">
 </head>
 <body>
 <header id="header">
@@ -30,8 +30,24 @@
         </ol>
         <!--bulldog logo to go home, leaderboard, contact, help -->
     </header>
-    <div id="leaderboard"></div>
-    <div id="matchHistory"></div>
-    <script src='./leaderboard2.js'></script>
+    <div id="menu-container">
+        <h1>Select The Game Board Size:</h1>
+        <select id="gameBoardSelect">
+            <option value="">Select Board Size</option>
+            <option value="./game1.php">8x8 Board</option> 
+            <option value="./game2.php">10x10 Board</option>
+        </select>
+    
+    </div>
+    <br>
+    <button type="button" onclick="goToBoard()">Start Game</button>
+    <script>
+        function goToBoard() {
+            var selectedBoard = document.getElementById('gameBoardSelect').value;
+            if (selectedBoard) {
+                window.location.href = selectedBoard;
+            }
+        }
+    </script>
 </body>
 </html>

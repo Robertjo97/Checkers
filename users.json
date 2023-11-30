@@ -2,10 +2,10 @@
     {
         "username": "Rob",
         "password": "test",
-        "totalScore": 17,
+        "totalScore": 37,
         "gamesWon": 1,
-        "timePlayed": 88,
-        "gamesPlayed": 2,
+        "timePlayed": 211,
+        "gamesPlayed": 5,
         "matchHistory": [
             {
                 "match": 1,
@@ -20,6 +20,27 @@
                 "totalScore": "5",
                 "opScore": "12",
                 "timePlayed": 30
+            },
+            {
+                "match": 3,
+                "winner": false,
+                "totalScore": "5",
+                "opScore": "12",
+                "timePlayed": 36
+            },
+            {
+                "match": 4,
+                "winner": false,
+                "totalScore": "9",
+                "opScore": "12",
+                "timePlayed": 51
+            },
+            {
+                "match": 5,
+                "winner": false,
+                "totalScore": "6",
+                "opScore": "12",
+                "timePlayed": 36
             }
         ]
     },

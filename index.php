@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaderboard</title>
-    <link type="text/css" rel="stylesheet" href="./leaderboard.css">
+    <title>Home Page</title>
+    <link href="./styleHome.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-<header id="header">
+    <header id="header">
         <ol>
             <li><a href="./index.php"><img src="./pics/Fresno_State_Bulldogs_logo.svg.png" id="logo" alt="Fresno state bulldog logo"></a></li>
             <?php 
@@ -30,8 +30,6 @@
         </ol>
         <!--bulldog logo to go home, leaderboard, contact, help -->
     </header>
-    <div id="leaderboard"></div>
-    <div id="matchHistory"></div>
-    <script src='./leaderboard2.js'></script>
+    <h1 id="title">Welcome to Fuckin Checkers</h1>
 </body>
 </html>

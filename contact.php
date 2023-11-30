@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaderboard</title>
-    <link type="text/css" rel="stylesheet" href="./leaderboard.css">
+    <link type="text/css" rel="stylesheet" href="./styleHome.css">
+    <title>Checkers Rules</title>
 </head>
 <body>
 <header id="header">
@@ -30,8 +30,6 @@
         </ol>
         <!--bulldog logo to go home, leaderboard, contact, help -->
     </header>
-    <div id="leaderboard"></div>
-    <div id="matchHistory"></div>
-    <script src='./leaderboard2.js'></script>
+    <h1>Contact</h1>
 </body>
 </html>
