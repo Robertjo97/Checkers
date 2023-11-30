@@ -66,5 +66,57 @@ body {
     border: 2px solid black;
 }
 
+#leaderboard, #matchHistory {
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+}
 
+/* Leaderboard and Match History Sections */
+#leaderboard, #matchHistory {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px; /* Adjust as needed */
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+}
 
+/* Style for tables in Leaderboard and Match History */
+#leaderboard table, #matchHistory table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+
+#leaderboard th, #leaderboard td, #matchHistory th, #matchHistory td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#leaderboard th, #matchHistory th {
+    background-color: #b1102b;
+    color: white;
+}
+
+/* Zebra Stripes for Rows */
+#leaderboard tr:nth-child(even), #matchHistory tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#leaderboard tr:hover, #matchHistory tr:hover {
+    background-color: #ddd;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+    #leaderboard, #matchHistory {
+        width: 95%;
+        margin: 10px;
+    }
+}

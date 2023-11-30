@@ -31,5 +31,26 @@
         <!--bulldog logo to go home, leaderboard, contact, help -->
     </header>
     <h1>Contact</h1>
+    <div>
+        <h2>Developers</h2>
+        <ul>
+            <li>
+                <div class="developer-box">
+                    <h3>Backend Developer: Robert Orlando</h3>
+                    <p>Email: <a href="mailto:rjorlando@mail.fresnostate.edu">rjorlando@mail.fresnostate.edu</a></p>
+                    <p>A Senior at CSU Fresno</p>
+
+                </div>
+            </li>
+            <li>
+                <div class="developer-box">
+                    <h3>Frontend Developer: Julian Prater</h3>
+                    <p>Email: <a href="mailto:julianprater@mail.fresnostate.edu">julianprater@mail.fresnostate.edu</a></p>
+                    <p>A Senior at CSU Fresno</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
 </body>
 </html>
