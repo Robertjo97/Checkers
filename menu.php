@@ -35,7 +35,7 @@
         <select id="gameBoardSelect">
             <option value="">Select Board Size</option>
             <option value="./game1.php">8x8 Board</option> 
-            <option value="./game2.html">10x10 Board</option>
+            <option value="./game2.php">10x10 Board</option>
         </select>
     
     </div>
