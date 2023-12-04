@@ -30,7 +30,8 @@
         </ol>
         <!--bulldog logo to go home, leaderboard, contact, help -->
     </header>
-    <h1>Contact</h1>
+    <div id='container'>
+    <h1 style="background-color:#b1102b; color:white">Contact</h1>
     <div>
         <h2>Developers</h2>
         <ul>

@@ -3,6 +3,13 @@ body {
     background-color: #ced1d4; /* Light gray background */
 }
 
+#container {
+    width: 1000px;
+    margin: 0 auto;
+    background-color: #ffffff; /* White background */
+    padding: 20px;
+}
+
 #header {
     text-align: center;
     margin-bottom: 50px;
