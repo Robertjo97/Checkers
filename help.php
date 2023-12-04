@@ -31,7 +31,7 @@
         <!--bulldog logo to go home, leaderboard, contact, help -->
     </header>
     <div id='container'>
-    <h1 style="background-color:#b1102b; color:white">Rules of Checkers</h1>
+    <h1 style="background-color:#b1102b; color:white; padding:5px;">Rules of Checkers</h1>
     <p>Checkers is a two-player strategy board game. Here are the basic rules:</p>
     <ol>
         <li>The game is played on an 8x8 or 10x10 board.</li>

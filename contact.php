@@ -31,7 +31,7 @@
         <!--bulldog logo to go home, leaderboard, contact, help -->
     </header>
     <div id='container'>
-    <h1 style="background-color:#b1102b; color:white">Contact</h1>
+    <h1 style="background-color:#b1102b; color:white; padding:5px;">Contact</h1>
     <div>
         <h2>Developers</h2>
         <ul>
