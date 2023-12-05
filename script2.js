@@ -385,6 +385,9 @@ class Board {
     
             // appends the piece to the new tile
             targetTile.appendChild(piece);
+            let sound = document.getElementById("myaudio"); 
+            sound.volume = 1.0;
+            sound.play();        //plays the sound effect for when a piece is moved
     
             // checks for win, current player winning, number of pieces left and switches turns 
             player.displayNumOfPieces();
