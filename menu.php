@@ -30,17 +30,17 @@
         </ol>
         <!--bulldog logo to go home, leaderboard, contact, help -->
     </header>
-    <div id="menu-container">
+    <div style="text-align:center" id="container">
         <h1>Select The Game Board Size:</h1>
         <select id="gameBoardSelect">
             <option value="">Select Board Size</option>
             <option value="./game1.php">8x8 Board</option> 
             <option value="./game2.php">10x10 Board</option>
         </select>
-    
-    </div>
+    <br>
     <br>
     <button type="button" onclick="goToBoard()">Start Game</button>
+    </div>
     <script>
         function goToBoard() {
             var selectedBoard = document.getElementById('gameBoardSelect').value;
