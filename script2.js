@@ -19,6 +19,13 @@ class Game {                //10 x 10 board
         }
     }
 
+    sendPlayerData(totalScore, win, timePlayed, opScore) {
+        let playerData = new XMLHttpRequest();
+        playerData.open('POST', './gameData2.php');
+        playerData.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        playerData.send('totalScore=' + totalScore + '&win=' + win + '&timePlayed=' + timePlayed + '&opScore=' + opScore);
+    }
+
     cpuMove() {
         let possibleMoves = this.board.getAllPossibleMoves(this.playerTwo);
         let bestMove = this.chooseBestCapture(possibleMoves);
@@ -45,17 +52,29 @@ class Game {                //10 x 10 board
     }
 
     checkWin() {
+        let timeInSecs = this.timer.mins * 60 + this.timer.secs;
         if(this.playerOne.pieces.length === 0) {                //checks if player 1 has any pieces left 
             alert("Player 2 wins! Player 1 has no more pieces left.");
             console.log("Player 2 wins! Player 1 has no more pieces left.");
+            this.sendPlayerData(20 - this.playerTwo.pieces.length, 'false', timeInSecs, 20);
         } else if (this.playerTwo.pieces.length === 0) {        //checks if player 2 has any pieces left
             alert("Player 1 wins! Player 2 has no more pieces left.");
             console.log("Player 1 wins! Player 2 has no more pieces left.");
+            this.sendPlayerData(20, 'true', timeInSecs, 20 - this.playerOne.pieces.length);
         }
         else {                                                  //checks if a player can not make any moves.
             let possibleMoves = this.board.getAllPossibleMoves(this.currentPlayer);
             if (possibleMoves.length === 0){
-                alert("Player " + (this.currentPlayer === this.playerOne ? "2" : "1") + " wins! The opponent cannot make any more moves.");
+                if(this.currentPlayer === this.playerOne) {
+                    alert("Player 2 wins! The opponent cannot make any more moves.");
+                    this.sendPlayerData(20 - this.playerTwo.pieces.length, 'false', timeInSecs, 20 - this.playerOne.pieces.length);
+                    console.log('Player 2 win');
+                }
+                else {
+                    alert("Player 1 wins! The opponent cannot make any more moves.");
+                    this.sendPlayerData(20 - this.playerTwo.pieces.length, 'true', timeInSecs, 20 - this.playerOne.pieces.length);
+                    console.log('Player 1 win');
+                }
             }
         }
     }
