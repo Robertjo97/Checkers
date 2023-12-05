@@ -141,5 +141,20 @@ function buildMatchHistory(data, name) {
     }
 }
 
+function sortButton(){
+    leaderboard.innerHTML = '';
+    let sort = document.getElementById('sort');
+    let request = new XMLHttpRequest();
+    request.open('POST', './leaderboardData2.php');
+    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    request.send('sort=' + sort.value);
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            let playerData = JSON.parse(request.responseText);
+            buildTable(playerData);
+        }
+    }
+}
+
 getLeaderboardData(buildTable);
 getMatchHistoryData(buildMatchHistory);

@@ -34,13 +34,14 @@
     <div style="text-align:center" id="sortContainer">
         <label for="sort">Sort by:</label>
         <select id="sort">
+            <option value="default">Default</option>
             <option value="username">Username</option>
             <option value="totalScore">Total Score</option>
-            <option value="wins">Games Won</option>
-            <option value="losses">Games Played</option>
-            <option value="">Time Played</option>
+            <option value="gamesWon">Games Won</option>
+            <option value="gamesPlayed">Games Played</option>
+            <option value="timePlayed">Time Played</option>
         </select>
-        <button id="sortButton">Sort</button>
+        <button id="sortButton" onclick="sortButton()">Sort</button>
     </div>
     <div id="leaderboard"></div>
     <div id="matchHistory"></div>
