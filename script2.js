@@ -11,8 +11,13 @@ class Game {                //10 x 10 board
     switchPlayer() {                                //switches player back and forth
         if (this.currentPlayer === this.playerOne) {
             this.currentPlayer = this.playerTwo;
-            document.getElementById('playerIdentifier').innerHTML = "Player 2's Turn";
-            setTimeout(() => this.cpuMove(), 500);      //makes it look like cpu is thinking for half a second
+            if (isCPU) {             //checks if player two is a CPU
+                document.getElementById('playerIdentifier').innerHTML = "Player 2's Turn";
+                setTimeout(() => this.cpuMove(), 500);      //makes it look like cpu is thinking
+            }
+            else {
+                document.getElementById('playerIdentifier').innerHTML = "Player 2's Turn";
+            }
         } else {
             this.currentPlayer = this.playerOne;
             document.getElementById('playerIdentifier').innerHTML = "Player 1's Turn";
@@ -232,7 +237,7 @@ class Board {
     
     checkForKing(piece) {                   //checks for if a piece made it to the end of the board and kings it
         if ((piece.player === 'Player 1' && piece.position.row === 0) || 
-            (piece.player === 'Player 2' && piece.position.row === 7)) {
+            (piece.player === 'Player 2' && piece.position.row === 9)) {
             piece.kingPiece();
             const pieceElement = this.getPieceElementAt(piece.position);
             pieceElement.classList.add(piece.player === 'Player 1' ? 'playerOnePieceKing' : 'playerTwoPieceKing');
