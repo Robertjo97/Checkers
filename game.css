@@ -134,10 +134,9 @@ button:hover {
 }
 
 #buttons-container {
-    float: left;
-    text-align: left;
-    padding-left: 20px;
-    margin-top: 200px
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 
