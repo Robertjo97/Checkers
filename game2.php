@@ -190,6 +190,9 @@
         </div>
 
     </section>
+    <audio id="myaudio" controls style="display:none">
+      <source src="sounds/placing.mp3" type="audio/mp3">
+    </audio>
     <script src="./script2.js"></script>
 </body>
 

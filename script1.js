@@ -345,7 +345,7 @@ class Board {
         });
     }
 
-    movePiece(selectedTile, targetTile) {
+    movePiece(selectedTile, targetTile) {                               //moves the piece to the target tile for players
         if (this.selectedTile && targetTile.classList.contains('highlight')) {
             const piece = this.selectedTile.firstChild;
             const player = game.currentPlayer;
