@@ -5,7 +5,7 @@ class Game {                //10 x 10 board
         this.currentPlayer = this.playerOne;                            //default player 1 goes first
         this.board = new Board();                                       //the game board
         this.timer = new Timer();                                       //the game timer
-        setInterval(this.timer.displayTimer.bind(this.timer), 1000);
+        setInterval(this.timer.displayTimer.bind(this.timer), 1000);    //calls the timer every second and binds  it to this class
     }
 
     switchPlayer() {                                //switches player back and forth
@@ -35,9 +35,9 @@ class Game {                //10 x 10 board
         let possibleMoves = this.board.getAllPossibleMoves(this.playerTwo);
         let bestMove = this.chooseBestCapture(possibleMoves);
         if (bestMove) {
-            this.board.executeMove(bestMove);
-        } else {
-            bestMove = possibleMoves.length > 0 ? possibleMoves[0] : null;
+            this.board.executeMove(bestMove);             //executes move for the CPU if a capture is possible
+        } else {                                         //if else makes a random move if no capture is possible
+            bestMove = possibleMoves.length > 0 ? possibleMoves[Math.floor(Math.random() * possibleMoves.length)] : null;
             if (bestMove) {
                 this.board.executeMove(bestMove);       //executes move for the CPU
             }
@@ -91,6 +91,9 @@ class Game {                //10 x 10 board
         else if (this.playerOne.pieces.length > this.playerTwo.pieces.length) {
             console.log("Currently Winning: Player One");
         }
+        else {
+            console.log("Currently Winning: Tie Game");
+        }
     }
 
     resetGame() {
@@ -122,9 +125,9 @@ class Game {                //10 x 10 board
 
 class Player {
     constructor(name, pieceClass) {
-        this.name = name;
-        this.pieceClass = pieceClass;
-        this.pieces = [];
+        this.name = name;            //player name
+        this.pieceClass = pieceClass;   //player piece class
+        this.pieces = [];            //array of pieces
     }
 
     addPiece(piece) {                   // this adds pieces to the pieces array by pushing
@@ -170,10 +173,10 @@ class Player {
 
 class Board {
     constructor() {
-        this.selectedTile = null;
-        this.selectedPiece = null;
-        this.pieceRow = 0;
-        this.pieceCol = 0;
+        this.selectedTile = null;    //selected tile
+        this.selectedPiece = null;  //selected piece
+        this.pieceRow = 0;        //piece row
+        this.pieceCol = 0;      //piece column
         this.board = document.getElementById('board'); // Gets the board from HTML
         this.clickedTile = this.clickedTile.bind(this); // Bind the clickedTile function to the current context
     }
@@ -244,8 +247,8 @@ class Board {
         }
     }
 
-    getAllPossibleMoves(player) {
-        let allMoves = [];
+    getAllPossibleMoves(player) {        //gets all possible moves for the CPU
+        let allMoves = [];              //array of all possible moves
         
         player.pieces.forEach(piece => {
             // iterates all possible moves
@@ -256,7 +259,7 @@ class Board {
         return allMoves;
     }
 
-    getLegalMovesForPiece(piece, player) {
+    getLegalMovesForPiece(piece, player) {      //gets all legal moves for the CPU
         let legalMoves = [];
         let directions = player === game.playerOne ? [[-1, -1], [-1, 1]] : [[1, -1], [1, 1]]; // normal set of direction for moves
         let pieceIndex = player.pieces.indexOf(piece); // F=finds current index of current piece
@@ -370,7 +373,6 @@ class Board {
     
                 if (pieceIndex !== -1) {
                     player.pieces[pieceIndex].kingPiece();
-                    // visual logic here
                     const pieceElement = selectedTile.firstChild;
                     pieceElement.classList.remove('playerOnePiece', 'playerTwoPiece');
                     pieceElement.classList.add(game.currentPlayer === game.playerOne ? 'playerOnePieceKing' : 'playerTwoPieceKing');
@@ -404,7 +406,7 @@ class Board {
     clearSelection() {
         // clears the current selection (if any)
         if (this.selectedTile != null) {  // refers to the instance variable
-            this.selectedTile.style.backgroundColor = '#323232';
+            this.selectedTile.style.backgroundColor = '#323232';    //sets the background color back to default
             this.selectedTile = null;
         }
     
@@ -605,7 +607,7 @@ class Board {
         game.playerOne.displayNumOfPieces();
     }
 
-    BoardColorPicker() {
+    BoardColorPicker() {                        //handles the color switching for the board
         let color = document.getElementById('BoardColorPicker').value;
         let whiteSpaces = document.getElementsByClassName('whiteSpace');
     
@@ -617,7 +619,7 @@ class Board {
 
 class Piece {
     constructor(player, row, col) {             // name of player, the row and column its located in (position)
-        this.player = player;
+        this.player = player;                   //player name
         this.position = { row, col };           //holds position of each players piece on the board
         this.isKing = false;                    //all piece objects are set to false
     }

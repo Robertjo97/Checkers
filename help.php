@@ -35,7 +35,7 @@
     <p>Checkers is a two-player strategy board game. Here are the basic rules:</p>
     <ol>
         <li>The game is played on an 8x8 or 10x10 board.</li>
-        <li>Each player starts with 12 (20 pieces for 10x10 board), either red or black, placed on the dark squares of the three rows closest to them.</li>
+        <li>Each player starts with 12 pieces (20 pieces for 10x10 board), either red or black, placed on the dark squares of the three rows closest to them.</li>
         <li>Players take turns moving one of their pieces diagonally forward to an adjacent unoccupied dark square.</li>
         <li>If an opponent's piece is adjacent and there is an empty square immediately beyond it, you must jump over the opponent's piece and capture it. The captured piece is removed from the board.</li>
         <li>If a piece reaches the opponent's back row, it becomes a "king," and kings can move both forward and backward diagonally.</li>
