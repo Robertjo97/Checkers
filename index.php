@@ -18,9 +18,9 @@
         <header id="header">
             <ol>
                 <li><a href="./index.php"><img src="./pics/Fresno_State_Bulldogs_logo.svg.png" id="logo" alt="Fresno state bulldog logo"></a></li>
-                <?php
-                session_start();
-                if (isset($_SESSION["username"]) && $_SESSION["username"] != null) {
+                <?php  
+                session_start(); //start session
+                if (isset($_SESSION["username"]) && $_SESSION["username"] != null) {   //if user is logged in, display game option
                     echo '<li class="options"><a href="./menu.php">Game</a></li>';
                 }
                 ?>
@@ -28,7 +28,7 @@
                 <li class="options"><a href="./contact.php">Contact</a></li>
                 <li class="options"><a href="./help.php">Help</a></li>
             <?php
-            if (isset($_SESSION["username"]) && $_SESSION["username"] != null) {
+            if (isset($_SESSION["username"]) && $_SESSION["username"] != null) { //if user is logged in, display logout option
                 echo '<li class="options"><a href="./logout.php">Log out</a></li>';
             } else {
                 echo '<li class="options"><a href="./login.html">Log in/Register</a></li>';
