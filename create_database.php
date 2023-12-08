@@ -1,4 +1,4 @@
-<?php 
+<?php //this script creates the database
 $servername = 'localhost';
 $username = 'Checkers';
 $password = 'CSCI130Checkers_';
@@ -11,7 +11,7 @@ if($conn->connect_error){
 }
 else {
     $sql = "CREATE DATABASE " . $dbName;
-    if($conn->query($sql) === TRUE){
+    if($conn->query($sql) === TRUE){    //query the above statement, if it works, signify that the database was created
         echo "Database created successfully";
     }
     else {
