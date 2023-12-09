@@ -1,4 +1,4 @@
-<?php
+<?php //this script creates the tables
 $servername = 'localhost';
 $username = 'Checkers';
 $password = 'CSCI130Checkers_';
@@ -10,6 +10,7 @@ if ($conn->connect_error) {
     die("Error: " . $conn->connect_error);
 }
 
+//sql1 creates a "users" table to hold each individual user's stats
 $sql1 = "CREATE TABLE IF NOT EXISTS users (
         user_id INT AUTO_INCREMENT PRIMARY KEY,
         username VARCHAR(255) NOT NULL,
@@ -19,6 +20,7 @@ $sql1 = "CREATE TABLE IF NOT EXISTS users (
         timePlayed INT,
         gamesPlayed INT
         );";
+//sql2 creates a "match_history" table to hold the each individual's match stats. They are linked by the user_id
 $sql2 = "CREATE TABLE IF NOT EXISTS match_history (
     match_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
