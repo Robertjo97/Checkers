@@ -1,6 +1,6 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #ced1d4; /* Light gray background */
+    background-color: #ced1d4; 
 }
 
 #header {
@@ -10,20 +10,20 @@ body {
 
 #header ol {
     list-style-type: none;
-    background-color: #13284c; /* Dark navy blue background */
+    background-color: #13284c; 
     padding: 10px 0;
     margin: 0;
-    border: none; /* Removed the black border */
+    border: none; 
 }
 
 #header li {
     display: inline;
-    margin: 0 15px; /* Adjusted margin for uniform spacing */
+    margin: 0 15px; 
 }
 
 #header li a {
     text-decoration: none;
-    color: #ffffff; /* White text for contrast */
+    color: #ffffff; 
     font-size: x-large;
     font-weight: bold;
 }
@@ -31,7 +31,7 @@ body {
 #header li a:hover {
     cursor: pointer;
     text-decoration: underline;
-    color: #b1102b; /* Deep red for hover effect */
+    color: #b1102b; 
 }
 
 #logo {
@@ -41,8 +41,8 @@ body {
 
 #title {
     text-align: center;
-    color: #13284c; /* Dark navy blue for the title */
-    margin-top: 20px; /* Added margin for spacing */
+    color: #13284c;
+    margin-top: 20px; 
 }
 
 
