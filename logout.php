@@ -1,6 +1,6 @@
 <?php 
-session_start();
-session_unset();
-session_destroy();
-header("Location: ./index.php");
+session_start(); //start the session
+session_unset(); //unset all session variables
+session_destroy(); //destroy the session
+header("Location: ./index.php"); //redirect to index.php
 ?>
