@@ -1,6 +1,6 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #ced1d4; /* Light gray background */
+    background-color: #ced1d4;
 }
 
 .indexList {
@@ -30,7 +30,7 @@ button:hover {
 #container {
     width: 1000px;
     margin: 0 auto;
-    background-color: #ffffff; /* White background */
+    background-color: #ffffff;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
@@ -42,20 +42,20 @@ button:hover {
 
 #header ol {
     list-style-type: none;
-    background-color: #13284c; /* Dark navy blue background */
+    background-color: #13284c;
     padding: 10px 0;
     margin: 0;
-    border: none; /* Removed the black border */
+    border: none; 
 }
 
 #header li {
     display: inline;
-    margin: 0 15px; /* Adjusted margin for uniform spacing */
+    margin: 0 15px;
 }
 
 #header li a {
     text-decoration: none;
-    color: #ffffff; /* White text for contrast */
+    color: #ffffff;
     font-size: x-large;
     font-weight: bold;
 }
@@ -63,7 +63,7 @@ button:hover {
 #header li a:hover {
     cursor: pointer;
     text-decoration: underline;
-    color: #b1102b; /* Deep red for hover effect */
+    color: #b1102b; 
 }
 
 #logo {
@@ -73,6 +73,6 @@ button:hover {
 
 #title {
     text-align: center;
-    color: #13284c; /* Dark navy blue for the title */
-    margin-top: 20px; /* Added margin for spacing */
+    color: #13284c; 
+    margin-top: 20px; 
 }
