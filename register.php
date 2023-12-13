@@ -18,7 +18,7 @@ if ($conn->connect_error) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') { //on incoming post request
     if (isset($_POST["username"]) && isset($_POST["password"])) { //if the username and password are set
         $user = $_POST['username']; //store the username in $user
-        $pass = $_POST['password']; //store the password in $pass
+        $pass = sha1($_POST['password']); //store the password in $pass and hashes it
 
         if ($user == ' ' || $pass == ' ') { //if the username or password is empty
             echo "Error: invalid username or password"; //print an error
